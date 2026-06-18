@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Care Text</title>
+  <desc id="desc">A blue-pink Care Text open graph image with a phone showing encouragement messages.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#256bd6"/>
+      <stop offset="1" stop-color="#ed0b62"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#061b3c" flood-opacity=".22"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" rx="8" fill="url(#bg)"/>
+  <circle cx="1040" cy="514" r="278" fill="none" stroke="#fff" stroke-width="42" opacity=".28"/>
+
+  <g transform="translate(44 38)">
+    <rect width="248" height="154" rx="12" fill="#fff" opacity=".96" filter="url(#softShadow)"/>
+    <g transform="translate(18 28)">
+      <path d="M38 0c-21 0-38 15-38 34 0 12 7 23 17 29l-5 18 22-13h4c21 0 38-15 38-34S59 0 38 0Z" fill="#fff" stroke="#061b3c" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M38 55c-17-13-25-22-25-32 0-7 5-12 12-12 5 0 10 3 13 8 3-5 8-8 13-8 7 0 12 5 12 12 0 10-8 19-25 32Z" fill="#ed0b62"/>
+      <path d="M8 38H1M12 49l-6 4M11 27l-7-3" stroke="#80bd00" stroke-width="4" stroke-linecap="round"/>
+    </g>
+    <text x="98" y="60" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="950" fill="#061b3c">Care</text>
+    <text x="98" y="104" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="950" fill="#ed0b62">Text</text>
+    <text x="124" y="128" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="900" fill="#061b3c" text-anchor="middle">SEND ENCOURAGEMENT.</text>
+    <text x="124" y="143" font-family="Inter, Arial, sans-serif" font-size="11" font-weight="900" fill="#061b3c" text-anchor="middle">STRENGTHEN CONNECTIONS.</text>
+  </g>
+
+  <g transform="translate(70 270)">
+    <text font-family="Georgia, 'Times New Roman', serif" font-size="78" font-style="italic" font-weight="700" fill="#fff">
+      <tspan x="0" y="0">A message</tspan>
+      <tspan x="0" y="74">can change</tspan>
+      <tspan x="0" y="148">the shape</tspan>
+      <tspan x="0" y="222">of a day.</tspan>
+    </text>
+    <text x="0" y="292" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="900" fill="#fff">
+      <tspan x="0">Send hope, reminders, and care</tspan>
+      <tspan x="0" dy="34">without another app to manage.</tspan>
+    </text>
+  </g>
+
+  <g transform="translate(795 88) rotate(-4 160 238)" filter="url(#softShadow)">
+    <rect width="304" height="488" rx="46" fill="#061b3c"/>
+    <rect x="22" y="22" width="260" height="444" rx="34" fill="#f8fbff"/>
+    <rect x="116" y="42" width="72" height="8" rx="4" fill="#061b3c" opacity=".20"/>
+    <g font-family="Inter, Arial, sans-serif" font-weight="900">
+      <rect x="50" y="168" width="174" height="70" rx="22" fill="#fff"/>
+      <text x="74" y="197" font-size="17" fill="#061b3c">Thinking of you</text>
+      <text x="74" y="221" font-size="17" fill="#061b3c">today.</text>
+      <rect x="96" y="260" width="166" height="52" rx="22" fill="#256bd6"/>
+      <text x="122" y="293" font-size="17" fill="#fff">Right on time.</text>
+      <rect x="66" y="334" width="188" height="50" rx="22" fill="#fff"/>
+      <text x="92" y="366" font-size="17" fill="#061b3c">You are not alone.</text>
+    </g>
+  </g>
+</svg>

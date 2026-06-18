@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Care Text">
+  <defs>
+    <linearGradient id="faviconBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#256bd6"/>
+      <stop offset="1" stop-color="#ed0b62"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#faviconBg)"/>
+  <path d="M13 19c0-6 5-11 11-11h16c6 0 11 5 11 11v15c0 6-5 11-11 11h-9L19 56v-12c-4-2-6-6-6-10V19Z" fill="#fff"/>
+  <text x="32" y="35" text-anchor="middle" dominant-baseline="middle" font-family="Inter, Arial, sans-serif" font-size="21" font-weight="950" fill="#ed0b62" letter-spacing="-1">CT</text>
+</svg>

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Care Text - Top Bar Options</title>
+  <style>
+    :root {
+      --ink: #061b3c;
+      --orange: #ff5a00;
+      --pink: #ed0b62;
+      --green: #80bd00;
+      --paper: #fffdf8;
+      --mist: #f6f8f3;
+      --line: rgba(6, 27, 60, .14);
+      --shadow: 0 22px 60px rgba(6, 27, 60, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 18% 8%, rgba(255, 90, 0, .10), transparent 26%),
+        radial-gradient(circle at 82% 24%, rgba(128, 189, 0, .12), transparent 28%),
+        linear-gradient(180deg, #fffaf0 0%, #f7fbf5 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    img { display: block; max-width: 100%; }
+
+    .page-head {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 42px 20px 20px;
+    }
+
+    .page-head p {
+      margin: 0 0 10px;
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .page-head h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: clamp(36px, 5vw, 76px);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+
+    .options {
+      display: grid;
+      gap: 26px;
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 24px 20px 70px;
+    }
+
+    .option {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, .74);
+      box-shadow: var(--shadow);
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .82);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .label span:first-child {
+      color: var(--orange);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .bar {
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      gap: clamp(22px, 4vw, 52px);
+      padding: clamp(22px, 3.8vw, 46px) clamp(22px, 5vw, 74px);
+    }
+
+    .bar img.logo {
+      width: clamp(150px, 16vw, 210px);
+      height: auto;
+      flex: 0 0 auto;
+    }
+
+    .headline {
+      margin: 0;
+      max-width: 860px;
+      font-size: clamp(34px, 4.8vw, 72px);
+      line-height: .94;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .headline .accent { color: var(--orange); }
+    .headline .pink { color: var(--pink); }
+    .headline .green { color: var(--green); }
+
+    .small-caps {
+      font-size: clamp(30px, 4.2vw, 62px);
+      line-height: 1;
+      font-weight: 950;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    .serif {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .humanist {
+      font-family: "Trebuchet MS", "Segoe UI", ui-sans-serif, sans-serif;
+      font-weight: 800;
+    }
+
+    .condensed {
+      font-family: "Arial Narrow", Impact, Haettenschweiler, sans-serif;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .01em;
+    }
+
+    .soft {
+      font-family: Avenir, "Avenir Next", "Segoe UI", ui-sans-serif, sans-serif;
+      font-weight: 750;
+    }
+
+    .editorial {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 600;
+      font-style: italic;
+    }
+
+    .stacked {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .stacked img.logo {
+      width: clamp(170px, 18vw, 236px);
+    }
+
+    .split {
+      justify-content: space-between;
+    }
+
+    .split .headline {
+      text-align: right;
+    }
+
+    .boxed {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .boxed img.logo {
+      background: rgba(255, 255, 255, .96);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .cream {
+      background: #fff7eb;
+    }
+
+    .white {
+      background: #fff;
+    }
+
+    .greenwash {
+      background: linear-gradient(90deg, #fffdf8, #f1f9e8);
+    }
+
+    .orange-line {
+      border-top: 7px solid var(--orange);
+    }
+
+    .pink-line {
+      border-top: 7px solid var(--pink);
+    }
+
+    .left-rail {
+      border-left: 14px solid var(--green);
+    }
+
+    .rule {
+      position: relative;
+    }
+
+    .rule::after {
+      content: "";
+      flex: 1 1 auto;
+      height: 2px;
+      min-width: 80px;
+      background: currentColor;
+      opacity: .16;
+    }
+
+    .badge-word {
+      display: inline-block;
+      padding: 0 .16em .06em;
+      border-radius: 8px;
+      background: rgba(255, 90, 0, .12);
+    }
+
+    .two-line {
+      max-width: 780px;
+    }
+
+    .two-line span {
+      display: block;
+    }
+
+    .micro {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .with-micro {
+      display: grid;
+      gap: 0;
+    }
+
+    .circle-mark {
+      width: clamp(150px, 15vw, 198px);
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border: 3px solid var(--ink);
+      border-radius: 50%;
+      background: #fff;
+      overflow: hidden;
+      flex: 0 0 auto;
+    }
+
+    .circle-mark img.logo {
+      width: 170%;
+      max-width: none;
+    }
+
+    .compact-logo img.logo {
+      width: clamp(134px, 13vw, 178px);
+    }
+
+    .max-title .headline {
+      max-width: 1000px;
+      font-size: clamp(42px, 5.8vw, 88px);
+    }
+
+    @media (max-width: 780px) {
+      .bar,
+      .split,
+      .rule {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .split .headline {
+        text-align: left;
+      }
+
+      .rule::after {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-head">
+    <p>Care Text header chooser</p>
+    <h1>20 top-bar treatments with bigger logo/title and no extra under-blurb.</h1>
+  </header>
+
+  <main class="options">
+    <section class="option">
+      <div class="label"><span>Option 01</span><span>Balanced Sans</span></div>
+      <div class="bar white">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline soft">Say the thing that matters with thoughtful messages.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 02</span><span>Two-Line Warm</span></div>
+      <div class="bar cream">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline two-line soft"><span>Say the thing that matters.</span><span>Send it when it counts.</span></h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 03</span><span>Big Statement</span></div>
+      <div class="bar white max-title">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline small-caps">Thoughtful messages for the people you care about.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 04</span><span>Serif Human</span></div>
+      <div class="bar greenwash">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline serif">Say what matters, beautifully and on time.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 05</span><span>Editorial Soft</span></div>
+      <div class="bar cream">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline editorial">A thoughtful message can change the shape of someone’s day.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 06</span><span>Dark Premium</span></div>
+      <div class="bar boxed">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline serif">Say the thing that matters.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 07</span><span>Orange Accent</span></div>
+      <div class="bar white orange-line">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline humanist">Send encouragement. <span class="accent">Strengthen connections.</span></h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 08</span><span>Centered Calm</span></div>
+      <div class="bar stacked white">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline soft">Thoughtful messages for the people you care about.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 09</span><span>Left Rail</span></div>
+      <div class="bar white left-rail">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline soft">Life gets busy. Love should still get through.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 10</span><span>Theatrical Condensed</span></div>
+      <div class="bar boxed">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline condensed">A small text. A big impact.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 11</span><span>Split Signature</span></div>
+      <div class="bar split cream">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline serif">Stay close. Show you care.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 12</span><span>With Micro Line</span></div>
+      <div class="bar greenwash">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <div class="with-micro">
+          <span class="micro">Automated encouragement</span>
+          <h2 class="headline soft">Your words, delivered when they matter.</h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 13</span><span>Highlighted Word</span></div>
+      <div class="bar white">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline humanist">Make someone feel <span class="badge-word">remembered</span>.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 14</span><span>Logo Circle</span></div>
+      <div class="bar cream">
+        <div class="circle-mark">
+          <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        </div>
+        <h2 class="headline serif">Send the words they need to hear.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 15</span><span>Rule Layout</span></div>
+      <div class="bar rule white">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline soft">Kind words, right on time.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 16</span><span>Pink Confidence</span></div>
+      <div class="bar white pink-line">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline soft"><span class="pink">Thoughtful messages</span> for real relationships.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 17</span><span>Compact Logo, Huge Copy</span></div>
+      <div class="bar white compact-logo max-title">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline small-caps">Say it before the moment passes.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 18</span><span>Gentle Utility</span></div>
+      <div class="bar greenwash">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline humanist">Schedule care. Send encouragement. Stay connected.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 19</span><span>Minimal Premium</span></div>
+      <div class="bar white">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline serif">For the people you never want to forget.</h2>
+      </div>
+    </section>
+
+    <section class="option">
+      <div class="label"><span>Option 20</span><span>Final CTA Feel</span></div>
+      <div class="bar boxed max-title">
+        <img class="logo" src="../assets/images/logo.png" alt="Care Text">
+        <h2 class="headline small-caps">Nurture relationships, one text at a time.</h2>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

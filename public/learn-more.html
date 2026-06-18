@@ -1,0 +1,880 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Learn More | Care Text</title>
+  <meta name="description" content="Care Text helps you send thoughtful encouragement texts to the people who matter most.">
+  <meta property="og:title" content="Care Text">
+  <meta property="og:description" content="A message can change the shape of a day.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://caretext.net/learn-more.html">
+  <meta property="og:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <meta property="og:image:secure_url" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Care Text">
+  <meta name="twitter:description" content="A message can change the shape of a day.">
+  <meta name="twitter:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <link rel="image_src" href="/assets/og-caretext.png?v=bluepink3">
+  <link rel="alternate" type="image/svg+xml" href="/assets/og-caretext.svg?v=bluepink3">
+  <link rel="icon" href="/favicon.svg?v=bluepink3" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=bluepink3" sizes="any">
+  <link rel="icon" href="/favicon-32.png?v=bluepink3" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/favicon-180.png?v=bluepink3">
+  <style>
+    :root {
+      --ink: #20384f;
+      --orange: #cf7f9a;
+      --pink: #d97f9f;
+      --green: #8aa5b8;
+      --blue: #4f7fa6;
+      --purple: #9c83ad;
+      --paper: #fffdf8;
+      --mist: #eef6fb;
+      --warm: #fff1f5;
+      --line: rgba(32, 56, 79, .14);
+      --muted: rgba(32, 56, 79, .68);
+      --shadow: 0 24px 70px rgba(58, 76, 105, .13);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      background:
+        linear-gradient(180deg, #fce7ef 0%, #fff5f8 34%, #dcecf6 100%);
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 10%;
+      border-bottom: 0;
+      background: transparent;
+      color: var(--ink);
+      backdrop-filter: none;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 40px);
+      font-style: italic;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .brand img {
+      width: clamp(128px, 12vw, 174px);
+      padding: 0;
+      border-radius: var(--radius);
+      background: transparent;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .nav a,
+    .button {
+      min-width: 124px;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 14px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .nav a {
+      border: 0;
+      background: var(--ink);
+      color: #fffdf8;
+    }
+
+    .button {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .button.light {
+      border: 0;
+      background: var(--ink);
+      color: #fffdf8;
+    }
+
+    .band {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .inner {
+      width: 100%;
+      margin: 0;
+      padding-inline: 10%;
+    }
+
+    #relationships,
+    #how,
+    #pricing,
+    #frequency,
+    #taxonomy,
+    #billing {
+      scroll-margin-top: 112px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 6.4vw, 90px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.02;
+      letter-spacing: 0;
+      text-transform: none;
+      text-wrap: balance;
+    }
+
+    h1 .orange { color: var(--orange); }
+
+    h2 {
+      margin-bottom: 14px;
+      font-size: clamp(34px, 5vw, 76px);
+      line-height: .92;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      font-size: 22px;
+      line-height: 1.1;
+    }
+
+    .script {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-weight: 600;
+      text-transform: none;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.42;
+      font-weight: 650;
+    }
+
+    .hero {
+      min-height: calc(86vh - 94px);
+      display: grid;
+      align-items: stretch;
+      background:
+        linear-gradient(108deg, rgba(255, 245, 248, .96) 0%, rgba(255, 245, 248, .96) 45%, rgba(238, 246, 251, .96) 45%, rgba(238, 246, 251, .96) 100%);
+    }
+
+    .hero .inner {
+      display: grid;
+      grid-template-columns: minmax(0, .82fr) minmax(420px, 1fr);
+      gap: clamp(26px, 5vw, 80px);
+      align-items: center;
+      padding-block: clamp(34px, 5vw, 72px);
+    }
+
+    .hero-panel {
+      max-width: 760px;
+    }
+
+    .hero-callout {
+      max-width: 660px;
+      margin-top: 26px;
+      border: 1px solid rgba(217, 127, 159, .22);
+      border-radius: 18px;
+      padding: clamp(20px, 3vw, 34px);
+      background: rgba(255, 253, 248, .92);
+      color: var(--ink);
+      box-shadow: var(--shadow);
+      transform: rotate(-.4deg);
+    }
+
+    .hero-callout h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(27px, 3.1vw, 44px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.12;
+      text-transform: none;
+    }
+
+    mark {
+      color: inherit;
+      background: transparent;
+      text-decoration: none;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: min(58vw, 610px);
+      display: grid;
+      align-items: end;
+      background: url("/assets/images/primary-clean.webp") center / contain no-repeat;
+    }
+
+    .speech {
+      width: min(100%, 430px);
+      margin: 0 auto clamp(28px, 5vw, 70px);
+      border-radius: 18px;
+      padding: 20px 22px;
+      background: rgba(255,255,255,.96);
+      box-shadow: var(--shadow);
+      font-size: clamp(20px, 2.2vw, 30px);
+      font-weight: 850;
+      line-height: 1.22;
+    }
+
+    .relationship-band {
+      background:
+        linear-gradient(180deg, #fff 0%, #fffdf8 100%);
+      border-block: 1px solid var(--line);
+    }
+
+    .relationship-band .inner {
+      display: grid;
+      grid-template-columns: minmax(250px, .42fr) minmax(0, 1fr);
+      gap: clamp(24px, 4vw, 58px);
+      align-items: center;
+      padding-block: clamp(36px, 5vw, 70px);
+    }
+
+    .relationship-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .relationship {
+      min-height: 190px;
+      display: grid;
+      align-content: start;
+      justify-items: center;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px 12px;
+      background: var(--paper);
+      box-shadow: 0 16px 40px rgba(58, 76, 105, .07);
+    }
+
+    .relationship:nth-child(2),
+    .relationship:nth-child(4) {
+      transform: translateY(18px);
+    }
+
+    .icon {
+      width: 66px;
+      height: 66px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 32px;
+      font-weight: 950;
+    }
+
+    .relationship strong {
+      display: block;
+      text-transform: none;
+      font-size: 14px;
+    }
+
+    .relationship p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .workshop {
+      background:
+        linear-gradient(90deg, #fff5f8 0%, #fff5f8 31%, #fff 31%, #fff 69%, #e7f2f8 69%, #e7f2f8 100%);
+    }
+
+    .workshop .inner {
+      display: grid;
+      grid-template-columns: minmax(260px, .55fr) minmax(320px, .74fr) minmax(280px, .48fr);
+      gap: clamp(16px, 3vw, 38px);
+      align-items: stretch;
+      padding-block: clamp(42px, 7vw, 88px);
+    }
+
+    .how,
+    .messages,
+    .price {
+      border-radius: var(--radius);
+      padding: clamp(20px, 3vw, 32px);
+      box-shadow: var(--shadow);
+    }
+
+    .how {
+      background: rgba(255,255,255,.86);
+      border: 1px solid var(--line);
+      transform: rotate(.25deg);
+      display: grid;
+      align-content: center;
+      text-align: center;
+    }
+
+    .how h2 {
+      max-width: 620px;
+      margin-inline: auto;
+      font-size: clamp(36px, 5.2vw, 74px);
+      line-height: 1.04;
+      text-wrap: balance;
+    }
+
+    .steps {
+      counter-reset: steps;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .step {
+      counter-increment: steps;
+      display: grid;
+      place-items: center;
+      min-height: 112px;
+      text-align: center;
+    }
+
+    .step::before {
+      content: none;
+    }
+
+    .step p,
+    .messages p {
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.42;
+    }
+
+    .messages {
+      background: rgba(255,255,255,.96);
+      border: 0;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .message-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+      padding-left: 22px;
+      list-style: disc;
+    }
+
+    .message-row {
+      display: list-item;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .message-row:nth-child(2),
+    .message-row:nth-child(4) {
+      transform: none;
+    }
+
+    .message-row:first-child p {
+      max-width: 680px;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: clamp(17px, 1.35vw, 21px);
+      font-style: normal;
+      font-weight: 750;
+      line-height: 1.65;
+      text-wrap: auto;
+    }
+
+    .message-row:not(:first-child) {
+      max-width: 680px;
+      margin-top: 0;
+      color: var(--muted);
+    }
+
+    .mini-icon {
+      display: none;
+    }
+
+    .message-row p {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(17px, 1.35vw, 21px);
+      font-weight: 750;
+      line-height: 1.65;
+    }
+
+    .price {
+      background: #29445f;
+      color: #fffaf0;
+      transform: rotate(.35deg);
+    }
+
+    .amount {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 10px 0 16px;
+      font-weight: 950;
+    }
+
+    .amount strong {
+      font-size: clamp(66px, 8vw, 110px);
+      line-height: .82;
+    }
+
+    .pricing-options {
+      display: grid;
+      gap: 12px;
+      margin: 10px 0 16px;
+    }
+
+    .tier {
+      border: 1px solid rgba(255, 245, 248, .26);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: rgba(255, 245, 248, .10);
+    }
+
+    .tier .amount {
+      margin: 0 0 6px;
+    }
+
+    .tier .amount strong {
+      font-size: clamp(44px, 5vw, 72px);
+    }
+
+    .tier p {
+      margin: 0;
+      color: rgba(255, 245, 248, .86);
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .brush {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 10px 14px;
+      background: var(--pink);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 950;
+      line-height: 1.05;
+      text-transform: none;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .feature-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      align-items: start;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .feature-list li::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      margin-top: 4px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: inset 0 0 0 5px #fff;
+    }
+
+    .frequency {
+      background: #fffdf8;
+    }
+
+    .frequency .inner,
+    .taxonomy .inner,
+    .billing .inner {
+      display: grid;
+      grid-template-columns: minmax(260px, .52fr) minmax(0, 1fr);
+      gap: clamp(24px, 5vw, 70px);
+      padding-block: clamp(42px, 7vw, 86px);
+    }
+
+    .cards,
+    .taxonomy-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .cards {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card,
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.86);
+      padding: 18px;
+      box-shadow: 0 14px 34px rgba(58, 76, 105, .06);
+    }
+
+    .card p,
+    .billing p {
+      color: var(--muted);
+      font-weight: 650;
+      line-height: 1.52;
+    }
+
+    .taxonomy {
+      background:
+        linear-gradient(135deg, #eef6fb 0%, #fffdf8 54%, #fff5f8 100%);
+      border-block: 1px solid var(--line);
+    }
+
+    .taxonomy-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .chip {
+      display: grid;
+      align-items: center;
+      min-height: 58px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .chip:nth-child(3n) { border-color: rgba(79, 127, 166, .30); }
+    .chip:nth-child(3n + 1) { border-color: rgba(217, 127, 159, .30); }
+    .chip:nth-child(3n + 2) { border-color: rgba(156, 131, 173, .28); }
+
+    .billing {
+      background: #fff;
+    }
+
+    .start {
+      background: linear-gradient(90deg, #ffdce7 0%, #ffdce7 44%, #29445f 44%, #29445f 100%);
+      color: #fffaf0;
+    }
+
+    .start .inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, .75fr);
+      gap: clamp(24px, 5vw, 70px);
+      align-items: center;
+      padding-block: clamp(32px, 6vw, 74px);
+    }
+
+    .start h2 {
+      color: var(--ink);
+      text-transform: none;
+    }
+
+    .start .script {
+      display: block;
+      color: var(--ink);
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 1.05;
+    }
+
+    .start-panel {
+      max-width: 720px;
+      justify-self: end;
+    }
+
+    .start-panel .eyebrow {
+      color: #ffdce7;
+    }
+
+    .start-panel h2 {
+      color: #fffaf0;
+    }
+
+    .start-panel .button {
+      min-width: 124px;
+      background: #fffdf8;
+      color: var(--ink);
+    }
+
+    .promise-strip {
+      background: linear-gradient(180deg, #fffdf8 0%, #fff1f5 58%, #eef6fb 100%);
+      color: var(--ink);
+    }
+
+    .promise-strip .inner {
+      display: block;
+      padding-block: clamp(54px, 8vw, 104px);
+    }
+
+    .closing-line {
+      max-width: 1050px;
+      margin: 0 auto;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(40px, 6vw, 86px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.08;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 10%;
+      border-top: 0;
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 1080px) {
+      .top,
+      .hero .inner,
+      .relationship-band .inner,
+      .workshop .inner,
+      .frequency .inner,
+      .taxonomy .inner,
+      .billing .inner,
+      .start .inner {
+        grid-template-columns: 1fr;
+      }
+
+      .top {
+        align-items: flex-start;
+      }
+
+      .hero {
+        background: linear-gradient(180deg, #fff5f8 0%, #fff5f8 55%, #eef6fb 55%, #eef6fb 100%);
+      }
+
+      .workshop {
+        background: linear-gradient(180deg, #fff5f8 0%, #fff 36%, #e7f2f8 72%);
+      }
+
+      .cards,
+      .relationship-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .relationship:nth-child(2),
+      .relationship:nth-child(4),
+      .message-row:nth-child(2),
+      .message-row:nth-child(4),
+      .hero-callout,
+      .how,
+      .messages,
+      .price {
+        transform: none;
+      }
+
+      .taxonomy-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .top,
+      .brand,
+      .start-panel,
+      .footer {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .brand { white-space: normal; }
+      .hero-visual { min-height: 440px; }
+      .cards,
+      .relationship-grid,
+      .taxonomy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">
+      <img src="/assets/images/logo-header.webp?v=bluepink3" alt="Care Text">
+      <span>Say the thing that matters.</span>
+    </a>
+    <nav class="nav" aria-label="Learn more sections">
+      <a href="#relationships">Relationships</a>
+      <a href="#how">How it works</a>
+      <a href="#taxonomy">Encouragement</a>
+    </nav>
+    <a class="button light" href="/app.html">Sign up</a>
+  </header>
+
+  <main>
+    <section class="band hero">
+      <div class="inner">
+        <div class="hero-panel">
+          <p class="eyebrow">Send encouragement. Strengthen connections.</p>
+          <h1>A small text. <span class="orange">A big impact.</span></h1>
+          <p class="lead script">Stay close. Show you care.</p>
+          <div class="hero-callout">
+            <h2>Send thoughtful encouragement to the people who matter most, right when they need it.</h2>
+            <p>Life gets busy. Let Care Text help you stay present in the moments that matter most.</p>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Loved ones reading meaningful messages">
+          <div class="speech">It’s the little things that remind them they’re loved.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band relationship-band" id="relationships">
+      <div class="inner">
+        <div>
+          <p class="eyebrow">Who it is for</p>
+          <h2>For the people who matter most.</h2>
+          <p class="lead">Choose the relationship, choose the message, choose the rhythm.</p>
+        </div>
+        <div class="relationship-grid">
+          <div class="relationship"><div class="icon" style="background:var(--pink)">♥</div><strong>Spouse</strong><p>Keep the connection strong.</p></div>
+          <div class="relationship"><div class="icon" style="background:var(--orange)">👥</div><strong>Parents</strong><p>Let them know you’re thinking of them.</p></div>
+          <div class="relationship"><div class="icon" style="background:var(--green)">⟡</div><strong>Kids</strong><p>Encourage them every day.</p></div>
+          <div class="relationship"><div class="icon" style="background:var(--blue)">🤝</div><strong>Friends</strong><p>Lift them up when they need it.</p></div>
+          <div class="relationship"><div class="icon" style="background:var(--purple)">♡</div><strong>Anyone</strong><p>Birthdays, anniversaries, special days, and more.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band workshop" id="how">
+      <div class="inner">
+        <section class="how">
+          <p class="eyebrow">How it works</p>
+          <h2>You choose. We deliver. They feel loved.</h2>
+        </section>
+
+        <section class="messages">
+          <p class="eyebrow">Example messages you can send</p>
+          <h2>The right message, right on time.</h2>
+          <ul class="message-list">
+            <li class="message-row"><p>Hey love, just wanted to remind you how proud I am of you. I’m lucky to have you in my life.</p></li>
+            <li class="message-row"><p>Good morning! I believe in you and can’t wait to see all the amazing things you do today.</p></li>
+            <li class="message-row"><p>Thinking of you today. You are strong, capable, and so appreciated.</p></li>
+            <li class="message-row"><p>Just a little reminder that I’m here for you, always.</p></li>
+          </ul>
+        </section>
+
+        <section class="price" id="pricing">
+          <p class="eyebrow">Simple pricing</p>
+          <div class="pricing-options">
+            <div class="tier">
+              <div class="amount"><strong>$4.99</strong><span>/ month</span></div>
+              <p>Up to 3 loved ones</p>
+            </div>
+            <div class="tier">
+              <div class="amount"><strong>$9.99</strong><span>/ month</span></div>
+              <p>Up to 10 loved ones / friends / connections</p>
+            </div>
+          </div>
+          <div class="brush">Thoughtful messages to your loved ones</div>
+          <ul class="feature-list">
+            <li>Easy to set up</li>
+            <li>Delivered year-round</li>
+            <li>Your words, at the right time</li>
+            <li>For any relationship</li>
+            <li>Private and secure</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="band frequency" id="frequency">
+      <div class="inner">
+        <div>
+          <p class="eyebrow">Sending frequency</p>
+          <h2>A rhythm that fits the relationship.</h2>
+        </div>
+        <div class="cards">
+          <article class="card"><h3>Once per day</h3><p>For daily encouragement, morning starts, and steady presence during hard seasons.</p></article>
+          <article class="card"><h3>Once per week</h3><p>For ongoing connection, family check-ins, and relationship maintenance.</p></article>
+          <article class="card"><h3>Every other week</h3><p>For gentle reminders and messages that should feel occasional and intentional.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band taxonomy" id="taxonomy">
+      <div class="inner">
+        <div>
+          <p class="eyebrow">20 types of encouragement</p>
+          <h2>Built around the kind of encouragement someone needs.</h2>
+          <p class="lead">Care Text can send everyday encouragement or messages shaped to the exact relationship and moment.</p>
+        </div>
+        <div class="taxonomy-grid">
+          <span class="chip">Morning Start</span><span class="chip">Goodnight Close</span><span class="chip">Spouse Connection</span><span class="chip">Parent Appreciation</span>
+          <span class="chip">Kids Encouragement</span><span class="chip">Friend Check-In</span><span class="chip">Just Thinking of You</span><span class="chip">Big Day Confidence</span>
+          <span class="chip">Birthday Love</span><span class="chip">Anniversary Gratitude</span><span class="chip">Long-Distance Closeness</span><span class="chip">Stressful Season</span>
+          <span class="chip">Faith-Based Hope</span><span class="chip">Nonreligious Hope</span><span class="chip">Grief Support</span><span class="chip">Self-Compassion</span>
+          <span class="chip">Celebrating Small Wins</span><span class="chip">Hard Conversations</span><span class="chip">Weekend Reset</span><span class="chip">Everyday Beauty</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="band promise-strip">
+      <div class="inner">
+        <p class="closing-line">Made for the people who matter most.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

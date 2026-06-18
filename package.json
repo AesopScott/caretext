@@ -1,0 +1,17 @@
+{
+  "name": "caretext",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8787",
+    "deploy": "wrangler deploy",
+    "playwright:install": "node scripts/install-playwright-browser.mjs",
+    "db:migrate:local": "wrangler d1 migrations apply caretext-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply caretext-db --remote"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.0",
+    "wrangler": "^4.0.0"
+  }
+}

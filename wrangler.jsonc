@@ -1,0 +1,37 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "caretext",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-06-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+  "routes": [
+    {
+      "pattern": "caretext.net/*",
+      "zone_name": "caretext.net"
+    },
+    {
+      "pattern": "www.caretext.net/*",
+      "zone_name": "caretext.net"
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  "vars": {
+    "APP_NAME": "Care Text",
+    "GOOGLE_REDIRECT_PATH": "/api/auth/google/callback"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "caretext-db",
+      "database_id": "1cfa391e-629a-43a7-81f8-1ffb15720de9",
+      "migrations_dir": "./migrations"
+    }
+  ]
+}

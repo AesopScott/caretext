@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Care Text - Five Website Design Sets</title>
+  <style>
+    :root {
+      --ink: #071b3d;
+      --navy: #001f4d;
+      --orange: #ff5a00;
+      --pink: #ed0b62;
+      --green: #80bd00;
+      --blue: #256bd6;
+      --cream: #fff8ec;
+      --mist: #f7fbf7;
+      --paper: #fffdf8;
+      --line: rgba(7, 27, 61, .16);
+      --shadow: 0 22px 60px rgba(7, 27, 61, .16);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: light;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    .button {
+      min-height: 44px;
+      border: 0;
+      border-radius: var(--radius);
+      padding: 12px 18px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    button:hover,
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid rgba(37, 107, 214, .55);
+      outline-offset: 3px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      padding: 12px clamp(14px, 2.4vw, 34px);
+      background: rgba(255, 253, 248, .88);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 950;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand img {
+      width: 90px;
+      height: auto;
+    }
+
+    .chooser {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 4px;
+      scrollbar-width: thin;
+    }
+
+    .chooser a {
+      flex: 0 0 auto;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 13px;
+      font-size: 13px;
+      font-weight: 850;
+      background: #fff;
+    }
+
+    .topbar .button {
+      background: var(--ink);
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .intro {
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: clamp(40px, 8vw, 96px) clamp(18px, 5vw, 80px);
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.74), rgba(255,255,255,.94)),
+        url("../assets/images/family2.png") center / cover;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro-inner {
+      max-width: 1180px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .6fr);
+      gap: clamp(24px, 5vw, 70px);
+      align-items: end;
+    }
+
+    .kicker {
+      margin: 0 0 14px;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      max-width: 920px;
+      font-size: clamp(46px, 8vw, 112px);
+      line-height: .86;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      overflow-wrap: normal;
+    }
+
+    .intro p {
+      max-width: 690px;
+      font-size: clamp(18px, 2vw, 26px);
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .source-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .82);
+      box-shadow: var(--shadow);
+    }
+
+    .source-card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .source-card p {
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 0;
+      font-weight: 600;
+    }
+
+    .set {
+      min-height: 100vh;
+      padding: clamp(34px, 6vw, 80px) clamp(18px, 5vw, 80px);
+      overflow: hidden;
+    }
+
+    .set-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 20px;
+      align-items: end;
+      max-width: 1280px;
+      margin: 0 auto clamp(28px, 4vw, 54px);
+    }
+
+    .set-number {
+      font-size: clamp(44px, 8vw, 118px);
+      line-height: .8;
+      font-weight: 950;
+      opacity: .18;
+    }
+
+    .set h2 {
+      margin-bottom: 10px;
+      font-size: clamp(38px, 6vw, 94px);
+      line-height: .9;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .set-desc {
+      max-width: 760px;
+      font-size: clamp(17px, 1.8vw, 22px);
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .canvas {
+      max-width: 1280px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .mini-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 68px;
+      padding: 14px clamp(16px, 3vw, 34px);
+      border-bottom: 1px solid currentColor;
+      border-color: rgba(7, 27, 61, .14);
+      font-weight: 900;
+    }
+
+    .mini-nav img {
+      width: 118px;
+      height: auto;
+    }
+
+    .mini-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      background: rgba(255,255,255,.8);
+      border: 1px solid currentColor;
+      color: currentColor;
+    }
+
+    .phone {
+      width: min(100%, 360px);
+      border: 10px solid #061936;
+      border-radius: 34px;
+      background: #fff;
+      padding: 18px;
+      box-shadow: 0 24px 50px rgba(0,0,0,.22);
+    }
+
+    .phone-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 14px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(7,27,61,.12);
+      font-weight: 950;
+    }
+
+    .bubble {
+      width: fit-content;
+      max-width: 88%;
+      margin: 10px 0;
+      padding: 12px 14px;
+      border-radius: 18px;
+      line-height: 1.35;
+      font-size: 14px;
+      font-weight: 700;
+      animation: floatIn .7s ease both;
+    }
+
+    .bubble.sent {
+      margin-left: auto;
+      color: #fff;
+      background: var(--blue);
+      border-bottom-right-radius: 6px;
+    }
+
+    .bubble.got {
+      background: #edf3ff;
+      border-bottom-left-radius: 6px;
+    }
+
+    .bubble:nth-child(3) { animation-delay: .08s; }
+    .bubble:nth-child(4) { animation-delay: .16s; }
+    .bubble:nth-child(5) { animation-delay: .24s; }
+
+    @keyframes floatIn {
+      from { transform: translateY(12px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .specs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .spec {
+      background: #fff;
+      padding: 18px;
+    }
+
+    .spec strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--orange);
+    }
+
+    .spec span {
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    /* Set 1 */
+    .set-one {
+      background: #0a0a0a;
+      color: #fff;
+    }
+
+    .set-one .canvas {
+      color: #fff;
+      background: #050505;
+      border-color: rgba(255,255,255,.22);
+    }
+
+    .overture-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(290px, .72fr);
+      min-height: 710px;
+    }
+
+    .overture-copy {
+      position: relative;
+      padding: clamp(26px, 5vw, 70px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(255,90,0,.22), transparent 45%),
+        #070707;
+    }
+
+    .overture-copy h3 {
+      margin: 30px 0;
+      max-width: 780px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(46px, 7vw, 108px);
+      line-height: .92;
+      letter-spacing: 0;
+    }
+
+    .stage-line {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .overture-image {
+      min-height: 560px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.74)),
+        url("../assets/images/family1.png") center right / cover;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .ticket {
+      width: min(100%, 420px);
+      background: rgba(255,255,255,.94);
+      color: var(--ink);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 22px 60px rgba(0,0,0,.24);
+    }
+
+    .ticket h4 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .marquee {
+      display: flex;
+      overflow: hidden;
+      border-top: 1px solid rgba(255,255,255,.2);
+      border-bottom: 1px solid rgba(255,255,255,.2);
+      background: #fff;
+      color: #000;
+    }
+
+    .marquee span {
+      flex: 0 0 auto;
+      padding: 16px 24px;
+      font-size: 22px;
+      font-weight: 950;
+      text-transform: uppercase;
+      animation: slide 18s linear infinite;
+    }
+
+    @keyframes slide {
+      to { transform: translateX(-100%); }
+    }
+
+    /* Set 2 */
+    .set-two {
+      background: var(--cream);
+    }
+
+    .storybook {
+      background: #fffaf1;
+    }
+
+    .storybook-hero {
+      display: grid;
+      grid-template-columns: minmax(0, .82fr) minmax(0, 1fr);
+      min-height: 690px;
+    }
+
+    .storybook-aside {
+      padding: clamp(24px, 4vw, 54px);
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: #fff;
+    }
+
+    .storybook-aside h3 {
+      font-size: clamp(38px, 5.5vw, 78px);
+      line-height: .95;
+      margin-bottom: 22px;
+    }
+
+    .chapter-list {
+      display: grid;
+      gap: 12px;
+      counter-reset: chapters;
+    }
+
+    .chapter {
+      counter-increment: chapters;
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fffdf8;
+    }
+
+    .chapter::before {
+      content: counter(chapters);
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-weight: 950;
+    }
+
+    .chapter strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .storybook-stage {
+      display: grid;
+      align-items: stretch;
+      padding: clamp(20px, 4vw, 54px);
+      background:
+        linear-gradient(90deg, rgba(255,250,241,.82), rgba(255,250,241,.3)),
+        url("../assets/images/family2.png") center / cover;
+    }
+
+    .page-card {
+      align-self: end;
+      max-width: 560px;
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(20px, 3vw, 36px);
+    }
+
+    .page-card blockquote {
+      margin: 0 0 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 4vw, 54px);
+      line-height: 1;
+    }
+
+    /* Set 3 */
+    .set-three {
+      background: #eef8ff;
+    }
+
+    .signal {
+      background: #09234f;
+      color: #fff;
+    }
+
+    .signal-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .7fr) minmax(0, 1fr);
+      min-height: 720px;
+    }
+
+    .signal-left {
+      padding: clamp(24px, 4vw, 54px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(160deg, rgba(237,11,98,.28), transparent 42%),
+        #09234f;
+    }
+
+    .signal-left h3 {
+      font-size: clamp(42px, 5.5vw, 88px);
+      line-height: .92;
+      margin: 28px 0 18px;
+    }
+
+    .signal-left p {
+      max-width: 540px;
+      color: rgba(255,255,255,.78);
+      font-size: 18px;
+      line-height: 1.5;
+      font-weight: 650;
+    }
+
+    .control-board {
+      display: grid;
+      grid-template-columns: minmax(260px, .72fr) minmax(0, 1fr);
+      gap: 18px;
+      padding: clamp(20px, 4vw, 42px);
+      background: #f5fbff;
+      color: var(--ink);
+    }
+
+    .composer,
+    .route-panel,
+    .metric-panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 18px;
+    }
+
+    .composer {
+      display: grid;
+      gap: 16px;
+      align-content: start;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 900;
+      color: rgba(7,27,61,.62);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .field input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      font: inherit;
+      color: var(--ink);
+    }
+
+    .send-btn {
+      background: var(--orange);
+      color: #fff;
+    }
+
+    .route-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .route-item {
+      display: grid;
+      grid-template-columns: 44px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #f9fcff;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: #fff;
+      font-weight: 950;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 6px rgba(128,189,0,.16);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .metric-panel strong {
+      display: block;
+      font-size: 30px;
+      line-height: 1;
+      color: var(--orange);
+    }
+
+    .metric-panel span {
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    /* Set 4 */
+    .set-four {
+      background: #fff;
+    }
+
+    .archive {
+      background: #fff;
+    }
+
+    .archive-hero {
+      min-height: 700px;
+      display: grid;
+      grid-template-columns: minmax(0, .86fr) minmax(0, 1fr);
+    }
+
+    .poster-column {
+      padding: clamp(22px, 4vw, 54px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--line);
+      background: #fafafa;
+    }
+
+    .poster-column h3 {
+      font-size: clamp(44px, 5.5vw, 92px);
+      line-height: .88;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .poster-photo {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      max-height: 340px;
+    }
+
+    .poster-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+    }
+
+    .work-card {
+      min-height: 250px;
+      padding: clamp(18px, 3vw, 34px);
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .work-card:nth-child(2) { background: #fff7ef; }
+    .work-card:nth-child(3) { background: #f0f9e9; }
+    .work-card:nth-child(4) { background: #eef5ff; }
+
+    .work-card h4 {
+      margin: 0;
+      font-size: clamp(25px, 2.6vw, 38px);
+      line-height: .98;
+      text-transform: uppercase;
+      overflow-wrap: break-word;
+    }
+
+    .work-card p {
+      margin: 18px 0 0;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .work-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 20px;
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: rgba(7,27,61,.56);
+    }
+
+    /* Set 5 */
+    .set-five {
+      background: #f4f0ea;
+    }
+
+    .quiet {
+      background: #15120f;
+      color: #fff;
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .quiet .mini-nav {
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .quiet-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, .72fr);
+      min-height: 730px;
+    }
+
+    .quiet-copy {
+      padding: clamp(24px, 5vw, 68px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(135deg, rgba(152,118,84,.34), transparent 42%),
+        #15120f;
+    }
+
+    .quiet-copy h3 {
+      max-width: 760px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(46px, 6.5vw, 104px);
+      line-height: .92;
+      margin: 28px 0 20px;
+    }
+
+    .quiet-copy p {
+      max-width: 650px;
+      color: rgba(255,255,255,.78);
+      font-size: clamp(17px, 1.6vw, 22px);
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .quiet-photo {
+      display: grid;
+      align-items: end;
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(21,18,15,.02), rgba(21,18,15,.78)),
+        url("../assets/images/family2.png") center / cover;
+    }
+
+    .price-panel {
+      max-width: 420px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.92);
+      color: var(--ink);
+      border-radius: var(--radius);
+      padding: 24px;
+    }
+
+    .price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 14px;
+      font-weight: 950;
+    }
+
+    .price strong {
+      font-size: 64px;
+      line-height: .9;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 18px 0 0;
+      list-style: none;
+      font-weight: 750;
+    }
+
+    .check-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+
+    .check-list li::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: inset 0 0 0 5px #fff;
+    }
+
+    .quiet-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,.18);
+      border-top: 1px solid rgba(255,255,255,.18);
+    }
+
+    .quiet-strip div {
+      padding: 22px;
+      background: #15120f;
+    }
+
+    .quiet-strip strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #f6c48f;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: 12px;
+    }
+
+    .note {
+      max-width: 1280px;
+      margin: 16px auto 0;
+      color: rgba(7,27,61,.7);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .set-one .note,
+    .set-five .note {
+      color: rgba(255,255,255,.72);
+    }
+
+    @media (max-width: 980px) {
+      .topbar {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar .button {
+        display: none;
+      }
+
+      .intro-inner,
+      .overture-hero,
+      .storybook-hero,
+      .signal-grid,
+      .control-board,
+      .archive-hero,
+      .quiet-hero {
+        grid-template-columns: 1fr;
+      }
+
+      .storybook-aside,
+      .poster-column {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .set-head {
+        grid-template-columns: 1fr;
+      }
+
+      .set-number {
+        order: -1;
+      }
+
+      .specs,
+      .metrics,
+      .quiet-strip {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .brand img {
+        width: 72px;
+      }
+
+      .mini-nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .mini-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+
+      .set {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .canvas {
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+      }
+
+      .work-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .route-item {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .status-dot {
+        grid-column: 2;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar" aria-label="Design set navigation">
+    <a class="brand" href="#top" aria-label="Care Text design board home">
+      <img src="../assets/images/logo.png" alt="Care Text">
+      <span>Five Design Sets</span>
+    </a>
+    <nav class="chooser" aria-label="Choose a design set">
+      <a href="#set-1">01 Overture</a>
+      <a href="#set-2">02 Storybook</a>
+      <a href="#set-3">03 Signal Desk</a>
+      <a href="#set-4">04 Archive</a>
+      <a href="#set-5">05 Quiet Care</a>
+    </nav>
+    <a class="button" href="#set-1">Start Reviewing</a>
+  </header>
+
+  <main id="top">
+    <section class="intro" aria-labelledby="intro-title">
+      <div class="intro-inner">
+        <div>
+          <p class="kicker">Care Text concept board</p>
+          <h1 id="intro-title">Five website worlds for loved-one connection.</h1>
+          <p>Each mockup adapts the Alan Menken site's award-winning structure: theatrical openings, editorial navigation, featured-work grids, transition-ready sections, and a restrained black-white-warm accent system.</p>
+        </div>
+        <aside class="source-card">
+          <h2>Design-experience++ framing</h2>
+          <p>Surface: product marketing website. Primary action: request demo or start today. Evidence: family scenarios, message previews, privacy controls, and simple setup. Accessibility: semantic nav, keyboard links, reduced-motion support, readable mobile layouts.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="set set-one" id="set-1" aria-labelledby="set-one-title">
+      <div class="set-head">
+        <div>
+          <p class="kicker">Design Set 01</p>
+          <h2 id="set-one-title">Overture</h2>
+          <p class="set-desc">The most direct Alan Menken adaptation: a theatrical hero, marquee movement, black-white contrast, and a "show begins now" feeling translated into family encouragement.</p>
+        </div>
+        <div class="set-number">01</div>
+      </div>
+
+      <div class="canvas">
+        <nav class="mini-nav" aria-label="Overture mock navigation">
+          <img src="../assets/images/logo.png" alt="Care Text">
+          <div class="mini-links">
+            <a href="#set-1">Moments</a>
+            <a href="#set-1">Messages</a>
+            <a href="#set-1">Privacy</a>
+            <a href="#set-1">Start</a>
+          </div>
+        </nav>
+        <div class="overture-hero">
+          <div class="overture-copy">
+            <div>
+              <span class="pill">Now playing: the little things</span>
+              <h3>A small text can become the part of the day they remember.</h3>
+              <div class="stage-line">
+                <a class="button" style="background:#fff;color:#000" href="#set-1">Request demo</a>
+                <a class="button" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.36)" href="#set-1">Explore the flow</a>
+              </div>
+            </div>
+            <div class="phone" aria-label="Message preview">
+              <div class="phone-top"><span>Dad</span><span>Reply received</span></div>
+              <div class="bubble sent">Good morning. Thinking about you today.</div>
+              <div class="bubble got">Needed that. Love you too.</div>
+              <div class="bubble sent">Want me to remind you before dinner?</div>
+            </div>
+          </div>
+          <div class="overture-image">
+            <div class="ticket">
+              <h4>Family check-in</h4>
+              <p>Choose the person, write the note, set the rhythm. Care Text sends it when life gets busy.</p>
+            </div>
+          </div>
+        </div>
+        <div class="marquee" aria-hidden="true">
+          <span>Send encouragement</span><span>Strengthen connections</span><span>Stay close</span><span>Show you care</span>
+          <span>Send encouragement</span><span>Strengthen connections</span><span>Stay close</span><span>Show you care</span>
+        </div>
+      </div>
+      <p class="note">Best if the brand wants drama, momentum, and a premium storytelling mood. Structure: theatrical hero, message scene, relationship use cases, privacy, start-today CTA.</p>
+    </section>
+
+    <section class="set set-two" id="set-2" aria-labelledby="set-two-title">
+      <div class="set-head">
+        <div>
+          <p class="kicker">Design Set 02</p>
+          <h2 id="set-two-title">Storybook</h2>
+          <p class="set-desc">A warmer editorial direction where each section is a chapter. It keeps the award-site storytelling but softens the tone for adult children, parents, and family coordinators.</p>
+        </div>
+        <div class="set-number">02</div>
+      </div>
+
+      <div class="canvas storybook">
+        <nav class="mini-nav" aria-label="Storybook mock navigation">
+          <img src="../assets/images/logo.png" alt="Care Text">
+          <div class="mini-links">
+            <a href="#set-2">Chapter 1</a>
+            <a href="#set-2">How it works</a>
+            <a href="#set-2">Examples</a>
+            <a href="#set-2">Privacy</a>
+          </div>
+        </nav>
+        <div class="storybook-hero">
+          <aside class="storybook-aside">
+            <div>
+              <span class="pill" style="color:var(--orange)">For busy families</span>
+              <h3>Stay close without turning love into logistics.</h3>
+              <p>Care Text gives recurring encouragement and check-ins a simple rhythm, so the people who matter most still hear from you.</p>
+            </div>
+            <div class="chapter-list">
+              <div class="chapter"><div><strong>Choose the person</strong><span>Spouse, parent, kid, friend, or anyone who needs a little lift.</span></div></div>
+              <div class="chapter"><div><strong>Write it once</strong><span>Keep your words personal, then schedule the moment.</span></div></div>
+              <div class="chapter"><div><strong>They feel remembered</strong><span>The message lands straight from you, right on time.</span></div></div>
+            </div>
+          </aside>
+          <div class="storybook-stage">
+            <div class="page-card">
+              <blockquote>"It is the little things that remind them they are loved."</blockquote>
+              <a class="button" style="background:var(--ink);color:#fff" href="#set-2">See example messages</a>
+            </div>
+          </div>
+        </div>
+        <div class="specs">
+          <div class="spec"><strong>Primary user</strong><span>Adult child or spouse who wants a dependable rhythm.</span></div>
+          <div class="spec"><strong>Interaction</strong><span>Scroll chapters with simple message reveals.</span></div>
+          <div class="spec"><strong>Conversion</strong><span>Start with one loved one and one message.</span></div>
+          <div class="spec"><strong>Trust</strong><span>Preference controls, opt-out, and quiet hours.</span></div>
+        </div>
+      </div>
+      <p class="note">Best if the brand wants warmth, readability, and a buyer-friendly explanation without losing craft.</p>
+    </section>
+
+    <section class="set set-three" id="set-3" aria-labelledby="set-three-title">
+      <div class="set-head">
+        <div>
+          <p class="kicker">Design Set 03</p>
+          <h2 id="set-three-title">Signal Desk</h2>
+          <p class="set-desc">A product-forward interface concept. It borrows the reference site's navigation and transition energy, then makes Care Text feel like a practical coordination surface.</p>
+        </div>
+        <div class="set-number">03</div>
+      </div>
+
+      <div class="canvas signal">
+        <nav class="mini-nav" aria-label="Signal Desk mock navigation">
+          <img src="../assets/images/logo.png" alt="Care Text">
+          <div class="mini-links">
+            <a href="#set-3">Compose</a>
+            <a href="#set-3">Route</a>
+            <a href="#set-3">Measure</a>
+            <a href="#set-3">Start</a>
+          </div>
+        </nav>
+        <div class="signal-grid">
+          <div class="signal-left">
+            <div>
+              <span class="pill">Control without coldness</span>
+              <h3>Every check-in has a place to land.</h3>
+              <p>For families who need more than a reminder but less than another complicated app. See who replied, what needs attention, and what can wait.</p>
+            </div>
+            <a class="button" style="background:#fff;color:var(--ink)" href="#set-3">Try the workflow</a>
+          </div>
+          <div class="control-board">
+            <section class="composer" aria-labelledby="composer-title">
+              <h4 id="composer-title">Schedule encouragement</h4>
+              <div class="field">
+                <label for="recipient">Recipient</label>
+                <input id="recipient" value="Mom">
+              </div>
+              <div class="field">
+                <label for="message">Message</label>
+                <input id="message" value="Thinking of you. Hope your morning feels easy.">
+              </div>
+              <div class="field">
+                <label for="cadence">Cadence</label>
+                <input id="cadence" value="Every Tuesday at 9:00 AM">
+              </div>
+              <button class="send-btn">Schedule text</button>
+            </section>
+            <section class="route-panel" aria-labelledby="route-title">
+              <h4 id="route-title">Family signal board</h4>
+              <div class="route-list">
+                <div class="route-item"><div class="avatar">M</div><div><strong>Mom replied</strong><br><span>Thanks honey. Call later?</span></div><span class="status-dot"></span></div>
+                <div class="route-item"><div class="avatar" style="background:var(--pink)">D</div><div><strong>Dad reminder sent</strong><br><span>Birthday note queued for 5 PM.</span></div><span class="status-dot"></span></div>
+                <div class="route-item"><div class="avatar" style="background:var(--blue)">S</div><div><strong>Sister updated</strong><br><span>Shared reply with family thread.</span></div><span class="status-dot"></span></div>
+              </div>
+              <div class="metrics">
+                <div class="metric-panel"><strong>4m</strong><span>Median reply</span></div>
+                <div class="metric-panel"><strong>12</strong><span>Texts sent</span></div>
+                <div class="metric-panel"><strong>0</strong><span>Missed check-ins</span></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <p class="note">Best if the product needs to feel operational and useful while still emotionally grounded.</p>
+    </section>
+
+    <section class="set set-four" id="set-4" aria-labelledby="set-four-title">
+      <div class="set-head">
+        <div>
+          <p class="kicker">Design Set 04</p>
+          <h2 id="set-four-title">Message Archive</h2>
+          <p class="set-desc">Inspired by the Alan Menken featured-work grid: each family moment becomes a featured "work." Strong for use-case pages and browsing different relationship types.</p>
+        </div>
+        <div class="set-number">04</div>
+      </div>
+
+      <div class="canvas archive">
+        <nav class="mini-nav" aria-label="Message Archive mock navigation">
+          <img src="../assets/images/logo.png" alt="Care Text">
+          <div class="mini-links">
+            <a href="#set-4">All moments</a>
+            <a href="#set-4">Parents</a>
+            <a href="#set-4">Spouse</a>
+            <a href="#set-4">Friends</a>
+          </div>
+        </nav>
+        <div class="archive-hero">
+          <aside class="poster-column">
+            <div>
+              <span class="pill" style="color:var(--pink)">Featured moment</span>
+              <h3>The message that changed the day.</h3>
+              <p>Browse the everyday moments Care Text can help protect: birthdays, rough mornings, routine check-ins, and the quiet "I remembered" notes.</p>
+            </div>
+            <div class="poster-photo">
+              <img src="../assets/images/family1.png" alt="Smiling couple looking at a phone with Care Text messaging examples">
+            </div>
+          </aside>
+          <div class="work-grid" aria-label="Message moment cards">
+            <article class="work-card">
+              <div>
+                <h4>Morning check-in</h4>
+                <p>"Good morning. I believe in you and cannot wait to see all the amazing things you do today."</p>
+              </div>
+              <div class="work-meta"><span>Parents</span><span>Daily</span></div>
+            </article>
+            <article class="work-card">
+              <div>
+                <h4>Still here</h4>
+                <p>"Just a little reminder that I am here for you, always."</p>
+              </div>
+              <div class="work-meta"><span>Friends</span><span>Hard days</span></div>
+            </article>
+            <article class="work-card">
+              <div>
+                <h4>Small celebration</h4>
+                <p>Birthdays, anniversaries, and personal dates can carry a message that feels prepared, not automated.</p>
+              </div>
+              <div class="work-meta"><span>Anyone</span><span>Special days</span></div>
+            </article>
+            <article class="work-card">
+              <div>
+                <h4>Thinking of you</h4>
+                <p>A simple recurring note keeps the connection warm when schedules are anything but simple.</p>
+              </div>
+              <div class="work-meta"><span>Spouse</span><span>Weekly</span></div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <p class="note">Best if the site should feel browsable and content-rich, with easy expansion into use cases, examples, and resources.</p>
+    </section>
+
+    <section class="set set-five" id="set-5" aria-labelledby="set-five-title">
+      <div class="set-head">
+        <div>
+          <p class="kicker">Design Set 05</p>
+          <h2 id="set-five-title">Quiet Care</h2>
+          <p class="set-desc">A restrained premium direction. It uses the reference site's black, white, and warm neutral palette while making the product feel private, calm, and grown-up.</p>
+        </div>
+        <div class="set-number">05</div>
+      </div>
+
+      <div class="canvas quiet">
+        <nav class="mini-nav" aria-label="Quiet Care mock navigation">
+          <img src="../assets/images/logo.png" alt="Care Text">
+          <div class="mini-links">
+            <a href="#set-5">Why it works</a>
+            <a href="#set-5">Pricing</a>
+            <a href="#set-5">Privacy</a>
+            <a href="#set-5">Begin</a>
+          </div>
+        </nav>
+        <div class="quiet-hero">
+          <div class="quiet-copy">
+            <div>
+              <span class="pill">Private by default</span>
+              <h3>Less noise. More moments that feel personal.</h3>
+              <p>Care Text helps you schedule thoughtful messages to the people who matter most, without turning love into another feed, app, or group-thread obligation.</p>
+            </div>
+            <div class="stage-line">
+              <a class="button" style="background:#f6c48f;color:#15120f" href="#set-5">Start today</a>
+              <a class="button" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,.34)" href="#set-5">View privacy</a>
+            </div>
+          </div>
+          <div class="quiet-photo">
+            <aside class="price-panel">
+              <p class="kicker">Simple plan</p>
+              <div class="price"><strong>$9.99</strong><span>/ month</span></div>
+              <p>Unlimited auto texts to your loved ones, in your words, on your schedule.</p>
+              <ul class="check-list">
+                <li>Easy to set up</li>
+                <li>You stay in control</li>
+                <li>Works for any relationship</li>
+                <li>Respectful opt-out and preferences</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+        <div class="quiet-strip">
+          <div><strong>Service flow</strong><span>Choose person, write message, set schedule, receive replies.</span></div>
+          <div><strong>Evidence</strong><span>Message previews, response status, and visible controls.</span></div>
+          <div><strong>Failure point</strong><span>Missed replies become visible without adding drama.</span></div>
+        </div>
+      </div>
+      <p class="note">Best if the brand wants the most polished and least promotional feel, with the clearest trust story.</p>
+    </section>
+  </main>
+</body>
+</html>

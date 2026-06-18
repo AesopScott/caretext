@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Care Text Brand Mockups</title>
+  <link rel="icon" href="/favicon.svg?v=bluepink3" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=bluepink3" sizes="any">
+  <link rel="icon" href="/favicon-32.png?v=bluepink3" type="image/png" sizes="32x32">
+  <style>
+    :root {
+      --ink: #061b3c;
+      --orange: #ff5a00;
+      --pink: #ed0b62;
+      --green: #80bd00;
+      --blue: #256bd6;
+      --purple: #7e3fb1;
+      --paper: #fffdf8;
+      --mist: #f7fbf2;
+      --line: rgba(6, 27, 60, .14);
+      --muted: rgba(6, 27, 60, .64);
+      --shadow: 0 26px 70px rgba(6, 27, 60, .16);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(180deg, #fffaf0 0%, #fffdf8 34%, #eef7f4 100%);
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px clamp(18px, 5vw, 72px);
+      background: rgba(6, 27, 60, .96);
+      color: #fff;
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 42px);
+      font-style: italic;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .brand img {
+      width: clamp(126px, 13vw, 180px);
+      padding: 8px;
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .top nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .top a {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 999px;
+      padding: 10px 14px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    main {
+      display: grid;
+      gap: clamp(34px, 5vw, 70px);
+      padding: clamp(24px, 5vw, 72px);
+    }
+
+    .intro {
+      max-width: 980px;
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--pink);
+      font-size: 13px;
+      font-weight: 950;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 820px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(44px, 7vw, 92px);
+      font-style: italic;
+      font-weight: 650;
+      line-height: .94;
+      text-wrap: balance;
+    }
+
+    .intro p {
+      max-width: 760px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(26px, 3vw, 42px);
+      line-height: 1.05;
+    }
+
+    .section-head span {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .og-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 430px), 1fr));
+      gap: 22px;
+    }
+
+    .option {
+      display: grid;
+      gap: 10px;
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .og {
+      position: relative;
+      container-type: inline-size;
+      aspect-ratio: 1200 / 630;
+      overflow: hidden;
+      border: 1px solid rgba(6, 27, 60, .12);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .og-logo {
+      position: absolute;
+      top: 3cqw;
+      left: 3.5cqw;
+      z-index: 3;
+      width: 17.5cqw;
+      padding: 1.1cqw;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .96);
+      box-shadow: 0 20px 44px rgba(6, 27, 60, .14);
+    }
+
+    .og-copy {
+      position: absolute;
+      z-index: 4;
+      display: grid;
+      gap: 1.5cqw;
+    }
+
+    .og-kicker {
+      width: max-content;
+      max-width: 100%;
+      border-radius: 999px;
+      padding: .85cqw 1.25cqw;
+      background: rgba(255, 255, 255, .86);
+      color: var(--ink);
+      font-size: 2cqw;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    .og-title {
+      max-width: 56.7cqw;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 6.8cqw;
+      font-style: italic;
+      font-weight: 650;
+      line-height: .93;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .og-sub {
+      max-width: 46.7cqw;
+      font-size: 2.5cqw;
+      font-weight: 850;
+      line-height: 1.15;
+    }
+
+    .phone {
+      position: absolute;
+      z-index: 3;
+      width: 24.2cqw;
+      min-height: 40cqw;
+      border: 1.2cqw solid #102448;
+      border-radius: 3.5cqw;
+      background: #f8fbff;
+      box-shadow: 0 32px 70px rgba(6, 27, 60, .26);
+    }
+
+    .phone::before {
+      content: "";
+      position: absolute;
+      top: 1cqw;
+      left: 50%;
+      width: 6cqw;
+      height: .7cqw;
+      border-radius: 999px;
+      background: rgba(6, 27, 60, .22);
+      transform: translateX(-50%);
+    }
+
+    .message-stack {
+      position: absolute;
+      inset: 4cqw 1.7cqw 2cqw;
+      display: grid;
+      align-content: center;
+      gap: 1.35cqw;
+    }
+
+    .msg {
+      width: fit-content;
+      max-width: 100%;
+      border-radius: 1.85cqw;
+      padding: 1.15cqw 1.4cqw;
+      background: #fff;
+      color: var(--ink);
+      font-size: 1.75cqw;
+      font-weight: 850;
+      line-height: 1.18;
+      box-shadow: 0 12px 26px rgba(6, 27, 60, .10);
+    }
+
+    .msg.sent {
+      justify-self: end;
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .person-img {
+      position: absolute;
+      z-index: 2;
+      filter: drop-shadow(0 26px 42px rgba(6, 27, 60, .18));
+    }
+
+    .mini-card {
+      position: absolute;
+      z-index: 4;
+      width: 25cqw;
+      border: 1px solid rgba(6, 27, 60, .12);
+      border-radius: var(--radius);
+      padding: 1.5cqw;
+      background: rgba(255, 255, 255, .92);
+      box-shadow: 0 22px 54px rgba(6, 27, 60, .16);
+      font-weight: 900;
+      line-height: 1.18;
+    }
+
+    .stamp {
+      position: absolute;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      width: 12.5cqw;
+      height: 12.5cqw;
+      border: .5cqw solid currentColor;
+      border-radius: 50%;
+      color: var(--pink);
+      font-size: 2.3cqw;
+      font-weight: 950;
+      line-height: .9;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(-9deg);
+    }
+
+    .og-1 {
+      background:
+        radial-gradient(circle at 84% 18%, rgba(128, 189, 0, .28), transparent 26%),
+        linear-gradient(135deg, #fffdf8 0%, #f8f3ff 48%, #eef9f4 100%);
+    }
+    .og-1 .og-copy { left: 5.2cqw; bottom: 4.8cqw; }
+    .og-1 .phone { right: 7.7cqw; bottom: -7.2cqw; transform: rotate(5deg); }
+
+    .og-2 {
+      background: #061b3c;
+      color: #fff;
+    }
+    .og-2::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(6, 27, 60, .96) 0%, rgba(6, 27, 60, .58) 52%, rgba(6, 27, 60, .16) 100%),
+        url("assets/images/primary-clean.png") center right / cover no-repeat;
+    }
+    .og-2 .og-copy { left: 4.8cqw; top: 14.5cqw; }
+    .og-2 .og-sub { color: rgba(255, 255, 255, .86); }
+
+    .og-3 {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.45)),
+        url("assets/images/primary-clean.png") center bottom / 96% auto no-repeat,
+        #fffdf8;
+    }
+    .og-3 .og-copy { left: 4.8cqw; top: 14.3cqw; }
+    .og-3 .og-title { max-width: 47.5cqw; }
+    .og-3 .stamp { right: 6.8cqw; top: 4.5cqw; }
+
+    .og-4 {
+      background:
+        linear-gradient(135deg, rgba(237, 11, 98, .94), rgba(255, 90, 0, .92)),
+        #ed0b62;
+      color: #fff;
+    }
+    .og-4::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      bottom: -170px;
+      width: 580px;
+      height: 580px;
+      border: 42px solid rgba(255, 255, 255, .34);
+      border-radius: 50%;
+    }
+    .og-4 .og-copy { left: 5.8cqw; top: 14.2cqw; }
+    .og-4 .phone { right: 8cqw; top: 7cqw; transform: rotate(-4deg); }
+
+    .og-5 {
+      background:
+        linear-gradient(135deg, rgba(37, 107, 214, .98), rgba(237, 11, 98, .94)),
+        #256bd6;
+      color: #fff;
+    }
+    .og-5::after {
+      content: "";
+      position: absolute;
+      right: -6.7cqw;
+      bottom: -14.2cqw;
+      width: 48.3cqw;
+      height: 48.3cqw;
+      border: 3.5cqw solid rgba(255, 255, 255, .30);
+      border-radius: 50%;
+    }
+    .og-5 .og-copy { left: 5.8cqw; top: 15.4cqw; }
+    .og-5 .og-title { max-width: 52cqw; }
+    .og-5 .og-sub { max-width: 43cqw; color: rgba(255, 255, 255, .9); }
+    .og-5 .phone { right: 8cqw; top: 7cqw; transform: rotate(-4deg); }
+
+    .og-6 {
+      background:
+        linear-gradient(135deg, #eff9f2 0%, #fffdf8 48%, #fff1e8 100%);
+    }
+    .og-6 .og-copy { left: 5.2cqw; top: 13.7cqw; }
+    .og-6 .tiles {
+      position: absolute;
+      right: 5.2cqw;
+      top: 6.3cqw;
+      display: grid;
+      grid-template-columns: repeat(2, 15.8cqw);
+      gap: 1.3cqw;
+    }
+    .og-6 .mini-card {
+      position: static;
+      width: 15.8cqw;
+      min-height: 10.7cqw;
+      display: grid;
+      align-content: space-between;
+      padding: 1.3cqw;
+      font-size: 2cqw;
+    }
+
+    .og-7 {
+      background: #fffdf8;
+    }
+    .og-7::before {
+      content: "";
+      position: absolute;
+      inset: 3.2cqw;
+      border: 3px solid rgba(6, 27, 60, .16);
+      border-radius: 2.3cqw;
+    }
+    .og-7 .og-logo { left: 50%; transform: translateX(-50%); }
+    .og-7 .og-copy {
+      inset: 14.5cqw 7.5cqw auto;
+      justify-items: center;
+      text-align: center;
+    }
+    .og-7 .og-title { max-width: 68.3cqw; }
+    .og-7 .og-sub { max-width: 63.3cqw; color: var(--muted); }
+
+    .og-8 {
+      background:
+        linear-gradient(90deg, #f8fbff 0%, #f8fbff 48%, #061b3c 48%, #061b3c 100%);
+    }
+    .og-8 .og-copy { left: 4.8cqw; top: 13.8cqw; }
+    .og-8 .person-img {
+      right: -4.5cqw;
+      bottom: -1.2cqw;
+      width: 56.7cqw;
+    }
+
+    .og-9 {
+      background:
+        radial-gradient(circle at 22% 20%, rgba(37, 107, 214, .18), transparent 28%),
+        radial-gradient(circle at 78% 80%, rgba(255, 90, 0, .18), transparent 28%),
+        #fffdf8;
+    }
+    .og-9 .og-copy { left: 4.8cqw; top: 12.7cqw; }
+    .og-9 .og-title {
+      max-width: 43cqw;
+      font-size: 5.25cqw;
+    }
+    .og-9 .message-cloud {
+      position: absolute;
+      right: 4.8cqw;
+      top: 6.8cqw;
+      width: 36.5cqw;
+      display: grid;
+      gap: 1.5cqw;
+    }
+    .og-9 .msg { font-size: 2.2cqw; }
+
+    .og-10 {
+      background:
+        linear-gradient(180deg, rgba(6, 27, 60, .26), rgba(6, 27, 60, .78)),
+        url("assets/images/primary.png") center / cover no-repeat;
+      color: #fff;
+    }
+    .og-10 .og-copy { left: 4.8cqw; bottom: 4.3cqw; }
+    .og-10 .og-sub { color: rgba(255, 255, 255, .9); }
+    .og-10 .og-logo { background: rgba(255,255,255,.98); }
+
+    .favicon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .favicon-card {
+      display: grid;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: rgba(255, 255, 255, .78);
+      box-shadow: 0 16px 42px rgba(6, 27, 60, .08);
+    }
+
+    .favicon-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 78px;
+    }
+
+    .icon {
+      position: relative;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      color: #fff;
+      font-weight: 950;
+      line-height: 1;
+      box-shadow: 0 14px 30px rgba(6, 27, 60, .18);
+    }
+
+    .tiny .icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      box-shadow: none;
+    }
+
+    .icon span {
+      position: relative;
+      z-index: 2;
+    }
+
+    .i1 { background: var(--ink); font-family: Georgia, "Times New Roman", serif; font-size: 34px; font-style: italic; }
+    .i2 { background: var(--pink); font-size: 29px; }
+    .i2::before { content: ""; width: 35px; height: 25px; border-radius: 10px; background: #fff; }
+    .i2 span { position: absolute; color: var(--pink); font-size: 26px; }
+    .i3 { background: #fff; color: var(--ink); border: 4px solid var(--orange); font-size: 33px; }
+    .i3::after { content: ""; position: absolute; right: 9px; bottom: 10px; width: 12px; height: 12px; border-radius: 50%; background: var(--green); }
+    .i4 { background: linear-gradient(135deg, var(--blue), var(--green)); font-size: 30px; }
+    .i4::before { content: ""; position: absolute; width: 30px; height: 30px; border: 4px solid #fff; border-radius: 50%; }
+    .i5 { background: linear-gradient(135deg, var(--blue), var(--pink)); }
+    .i5::before {
+      content: "";
+      position: absolute;
+      left: 20%;
+      top: 24%;
+      width: 60%;
+      height: 46%;
+      border-radius: 28% / 36%;
+      background: #fff;
+    }
+    .i5::after {
+      content: "";
+      position: absolute;
+      left: 34%;
+      bottom: 23%;
+      width: 18%;
+      height: 18%;
+      background: #fff;
+      transform: rotate(45deg);
+    }
+    .i5 span {
+      color: var(--pink);
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: -1px;
+      transform: translateY(-4%);
+    }
+    .tiny .i5 span {
+      font-size: 8px;
+      letter-spacing: -.5px;
+    }
+    .i6 { background: #fffdf8; color: var(--pink); border: 4px solid var(--ink); font-size: 28px; }
+    .i6 span { transform: translateY(-1px); }
+    .i7 { background: var(--green); font-family: Georgia, "Times New Roman", serif; font-size: 37px; font-style: italic; }
+    .i7::after { content: ""; position: absolute; right: 8px; top: 9px; width: 15px; height: 15px; border-radius: 50%; background: var(--pink); }
+    .i8 { background: var(--ink); }
+    .i8::before,
+    .i8::after { content: ""; position: absolute; width: 28px; height: 28px; border-radius: 50%; background: var(--pink); transform: rotate(-45deg); }
+    .i8::after { left: 25px; background: var(--orange); mix-blend-mode: screen; }
+    .i9 { background: #fff; color: var(--blue); border: 4px solid var(--blue); font-size: 31px; }
+    .i9::before { content: ""; position: absolute; inset: 11px; border-radius: 50%; background: rgba(37,107,214,.12); }
+    .i10 { background: linear-gradient(135deg, var(--purple), var(--pink)); font-size: 29px; }
+    .i10::before { content: ""; position: absolute; inset: 13px 11px 17px; border: 3px solid #fff; border-radius: 999px; }
+    .i10::after { content: ""; position: absolute; right: 17px; bottom: 15px; width: 9px; height: 9px; background: #fff; transform: rotate(45deg); }
+
+    .tiny {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    @media (max-width: 720px) {
+      .top,
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .og-logo {
+        top: 20px;
+        left: 22px;
+        width: 140px;
+        padding: 8px;
+      }
+
+      .og-title {
+        font-size: 42px;
+      }
+
+      .og-sub {
+        font-size: 18px;
+      }
+
+      .og-kicker {
+        font-size: 14px;
+      }
+
+      .phone,
+      .mini-card,
+      .stamp,
+      .person-img,
+      .og-6 .tiles,
+      .og-9 .message-cloud {
+        display: none;
+      }
+
+      .og .og-copy {
+        inset: auto 24px 28px 24px;
+        justify-items: start;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="assets/images/logo-header.png?v=bluepink3" alt="Care Text">
+      <span>Brand mockups</span>
+    </div>
+    <nav aria-label="Mockup sections">
+      <a href="#og-images">OG images</a>
+      <a href="#favicons">Favicons</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">Care Text</p>
+      <h1 id="page-title">Choose a share image and a tiny mark.</h1>
+      <p>Ten open graph directions and ten favicon directions, all mocked up in one place for quick visual comparison.</p>
+    </section>
+
+    <section id="og-images" aria-labelledby="og-title">
+      <div class="section-head">
+        <h2 id="og-title">Open Graph Images</h2>
+        <span>1200 x 630 preview compositions</span>
+      </div>
+
+      <div class="og-grid">
+        <article class="option">
+          <div class="label"><span>OG 01</span><span>Product promise</span></div>
+          <div class="og og-1">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">Care Text</div>
+              <div class="og-title">Say the thing that matters.</div>
+              <div class="og-sub">Scheduled encouragement texts for the people you care about.</div>
+            </div>
+            <div class="phone">
+              <div class="message-stack">
+                <div class="msg">Thinking of you today.</div>
+                <div class="msg sent">Right on time.</div>
+                <div class="msg">You are not alone.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 02</span><span>Human photo</span></div>
+          <div class="og og-2">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">Care made timely</div>
+              <div class="og-title">A message can change the shape of a day.</div>
+              <div class="og-sub">Send hope, reminders, and care without another app to manage.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 03</span><span>Family lineup</span></div>
+          <div class="og og-3">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">For real relationships</div>
+              <div class="og-title">Texts that help people feel remembered.</div>
+              <div class="og-sub">Simple scheduled encouragement, built around care.</div>
+            </div>
+            <div class="stamp">Built<br>with<br>care</div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 04</span><span>Bold launch</span></div>
+          <div class="og og-4">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">Care Text</div>
+              <div class="og-title">Hope, sent before the day gets heavy.</div>
+              <div class="og-sub">A lightweight way to show up through text.</div>
+            </div>
+            <div class="phone">
+              <div class="message-stack">
+                <div class="msg">Small steps still count.</div>
+                <div class="msg sent">I needed this.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 05</span><span>Warm story</span></div>
+          <div class="og og-5">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-title">A message can change the shape of a day.</div>
+              <div class="og-sub">Send hope, reminders, and care without another app to manage.</div>
+            </div>
+            <div class="phone">
+              <div class="message-stack">
+                <div class="msg">Thinking of you today.</div>
+                <div class="msg sent">Right on time.</div>
+                <div class="msg">You are not alone.</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 06</span><span>Category system</span></div>
+          <div class="og og-6">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">Choose the tone</div>
+              <div class="og-title">Inspiration for the moment someone is in.</div>
+              <div class="og-sub">From hard days to small wins to ordinary beauty.</div>
+            </div>
+            <div class="tiles">
+              <div class="mini-card">Self-Compassion</div>
+              <div class="mini-card">Small Wins</div>
+              <div class="mini-card">Faith-Based Hope</div>
+              <div class="mini-card">Everyday Beauty</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 07</span><span>Quiet premium</span></div>
+          <div class="og og-7">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">Care Text</div>
+              <div class="og-title">Thoughtful words, delivered when they matter.</div>
+              <div class="og-sub">A calmer way to keep encouragement moving through real life.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 08</span><span>Editorial split</span></div>
+          <div class="og og-8">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">No feed. No noise.</div>
+              <div class="og-title">Just a text that says you remembered.</div>
+              <div class="og-sub">Care Text helps you show up simply.</div>
+            </div>
+            <img class="person-img" src="assets/images/family2.png" alt="">
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 09</span><span>Conversation proof</span></div>
+          <div class="og og-9">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">Real support</div>
+              <div class="og-title">The right words can arrive without waiting for the perfect moment.</div>
+            </div>
+            <div class="message-cloud">
+              <div class="msg">Breathe first. The next step can be small.</div>
+              <div class="msg sent">Thank you. Truly.</div>
+              <div class="msg">There is still good in today.</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="option">
+          <div class="label"><span>OG 10</span><span>Full-bleed people</span></div>
+          <div class="og og-10">
+            <img class="og-logo" src="assets/images/logo-header.png?v=bluepink3" alt="">
+            <div class="og-copy">
+              <div class="og-kicker">Care Text</div>
+              <div class="og-title">For the people you keep close.</div>
+              <div class="og-sub">Automated encouragement texts that still feel personal.</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="favicons" aria-labelledby="favicon-title">
+      <div class="section-head">
+        <h2 id="favicon-title">Favicons</h2>
+        <span>Shown at 64px and 24px</span>
+      </div>
+
+      <div class="favicon-grid">
+        <article class="favicon-card">
+          <div class="label"><span>Icon 01</span><span>Script C</span></div>
+          <div class="favicon-row"><div class="icon i1"><span>C</span></div><div class="tiny"><div class="icon i1"><span>C</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 02</span><span>Chat heart</span></div>
+          <div class="favicon-row"><div class="icon i2"><span>+</span></div><div class="tiny"><div class="icon i2"><span>+</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 03</span><span>Care badge</span></div>
+          <div class="favicon-row"><div class="icon i3"><span>C</span></div><div class="tiny"><div class="icon i3"><span>C</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 04</span><span>Hope ring</span></div>
+          <div class="favicon-row"><div class="icon i4"><span>C</span></div><div class="tiny"><div class="icon i4"><span>C</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 05</span><span>Text bubble</span></div>
+          <div class="favicon-row"><div class="icon i5"><span>CT</span></div><div class="tiny"><div class="icon i5"><span>CT</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 06</span><span>Outlined CT</span></div>
+          <div class="favicon-row"><div class="icon i6"><span>CT</span></div><div class="tiny"><div class="icon i6"><span>CT</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 07</span><span>Green C</span></div>
+          <div class="favicon-row"><div class="icon i7"><span>C</span></div><div class="tiny"><div class="icon i7"><span>C</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 08</span><span>Linked care</span></div>
+          <div class="favicon-row"><div class="icon i8"><span></span></div><div class="tiny"><div class="icon i8"><span></span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 09</span><span>Blue seal</span></div>
+          <div class="favicon-row"><div class="icon i9"><span>C</span></div><div class="tiny"><div class="icon i9"><span>C</span></div>tiny read</div></div>
+        </article>
+        <article class="favicon-card">
+          <div class="label"><span>Icon 10</span><span>Bubble mark</span></div>
+          <div class="favicon-row"><div class="icon i10"><span>C</span></div><div class="tiny"><div class="icon i10"><span>C</span></div>tiny read</div></div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

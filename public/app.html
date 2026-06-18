@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign Up | Care Text</title>
+  <meta name="description" content="Sign up for Care Text and start sending thoughtful scheduled messages to the people you care about.">
+  <meta property="og:title" content="Care Text">
+  <meta property="og:description" content="A message can change the shape of a day.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://caretext.net/app.html">
+  <meta property="og:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <meta property="og:image:secure_url" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Care Text">
+  <meta name="twitter:description" content="A message can change the shape of a day.">
+  <meta name="twitter:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <link rel="image_src" href="/assets/og-caretext.png?v=bluepink3">
+  <link rel="alternate" type="image/svg+xml" href="/assets/og-caretext.svg?v=bluepink3">
+  <link rel="icon" href="/favicon.svg?v=bluepink3" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=bluepink3" sizes="any">
+  <link rel="icon" href="/favicon-32.png?v=bluepink3" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/favicon-180.png?v=bluepink3">
+  <style>
+    :root {
+      --ink: #20384f;
+      --orange: #cf7f9a;
+      --pink: #d97f9f;
+      --green: #8aa5b8;
+      --blue: #4f7fa6;
+      --paper: #fffdf8;
+      --line: rgba(32, 56, 79, .14);
+      --muted: rgba(32, 56, 79, .68);
+      --shadow: 0 24px 70px rgba(58, 76, 105, .12);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(217, 127, 159, .22), transparent 30%),
+        radial-gradient(circle at 90% 78%, rgba(79, 127, 166, .22), transparent 32%),
+        linear-gradient(180deg, #fce7ef 0%, #dcecf6 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .top,
+    .hero,
+    footer {
+      padding-inline: 10%;
+    }
+
+    .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding-block: 18px;
+      border-bottom: 0;
+      background: transparent;
+      backdrop-filter: none;
+    }
+
+    .top img {
+      width: clamp(136px, 14vw, 190px);
+      height: auto;
+      padding: 0;
+      border-radius: var(--radius);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .button,
+    button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: var(--ink);
+      color: #fff;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .button.secondary {
+      min-width: 126px;
+      border: 0;
+      background: var(--ink);
+      color: #fffdf8;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .88fr) minmax(360px, .74fr);
+      gap: clamp(32px, 6vw, 92px);
+      align-items: center;
+      padding-block: clamp(44px, 8vw, 110px);
+    }
+
+    h1,
+    h2,
+    p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(52px, 8vw, 124px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: .88;
+      letter-spacing: 0;
+      text-transform: none;
+      text-wrap: balance;
+    }
+
+    h1 span { color: var(--orange); }
+
+    .lead {
+      max-width: 720px;
+      color: var(--muted);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 42px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+      max-width: 680px;
+    }
+
+    .plan {
+      border: 1px solid rgba(217, 127, 159, .22);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 16px 40px rgba(58, 76, 105, .08);
+    }
+
+    .plan strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: .95;
+    }
+
+    .plan p {
+      margin: 0;
+      color: var(--muted);
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: clamp(20px, 3vw, 32px);
+      background: rgba(255,253,248,.92);
+      box-shadow: var(--shadow);
+      transform: rotate(.2deg);
+    }
+
+    form h2 {
+      margin-bottom: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: .95;
+      text-wrap: balance;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: rgba(32, 56, 79, .78);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 11px 12px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 96px;
+      resize: vertical;
+    }
+
+    .fine {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.42;
+    }
+
+    .message {
+      display: none;
+      border-radius: var(--radius);
+      padding: 14px;
+      background: rgba(217, 127, 159, .14);
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    .message.is-visible {
+      display: block;
+    }
+
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-block: 24px;
+      border-top: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .plans {
+        grid-template-columns: 1fr;
+      }
+
+      form {
+        transform: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .top,
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="top">
+      <a href="/"><img src="/assets/images/logo-header.webp?v=bluepink3" alt="Care Text"></a>
+      <nav class="nav" aria-label="Signup navigation">
+        <a class="button secondary" href="/">Home</a>
+        <a class="button secondary" href="/learn-more.html">Learn more</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h1>Start sending <span>better little messages.</span></h1>
+        <p class="lead">A simple way to stay close to the people who matter most, even when life gets full.</p>
+        <div class="plans" aria-label="Care Text plans">
+          <div class="plan"><strong>$4.99</strong><p>per month for up to 3 loved ones.</p></div>
+          <div class="plan"><strong>$9.99</strong><p>per month for up to 10 loved ones / friends / connections.</p></div>
+        </div>
+      </div>
+
+      <form id="signupForm">
+        <h2>Sign up for Care Text.</h2>
+        <label>Your name <input name="name" autocomplete="name" required></label>
+        <label>Email <input name="email" type="email" autocomplete="email" required></label>
+        <label>Plan
+          <select name="plan" required>
+            <option value="3-loved-ones">$4.99 / month - up to 3 loved ones</option>
+            <option value="10-loved-ones">$9.99 / month - up to 10 loved ones / friends / connections</option>
+          </select>
+        </label>
+        <label>Who do you want to stay close to?
+          <textarea name="relationships" placeholder="Spouse, parents, kids, friends..."></textarea>
+        </label>
+        <button>Join the signup list</button>
+        <p class="fine">We will use this to follow up about Care Text access. No spam, no selling your information.</p>
+        <div class="message" id="message" role="status" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <footer>
+      <span>Care Text. Send encouragement. Strengthen connections.</span>
+      <span>hello@caretext.net</span>
+    </footer>
+  </main>
+
+  <script>
+    const form = document.querySelector("#signupForm");
+    const message = document.querySelector("#message");
+
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      const signups = JSON.parse(localStorage.getItem("careTextSignups") || "[]");
+      signups.push({ ...data, createdAt: new Date().toISOString() });
+      localStorage.setItem("careTextSignups", JSON.stringify(signups));
+      form.reset();
+      message.textContent = "You are on the list. We will follow up soon with the next step.";
+      message.classList.add("is-visible");
+    });
+  </script>
+</body>
+</html>
