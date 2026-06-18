@@ -27,6 +27,16 @@ Then open:
 - Marketing hero: `http://127.0.0.1:8787/`
 - App scaffold: `http://127.0.0.1:8787/app.html`
 
+### Deployment
+
+CareText deploys as a Cloudflare Worker using `wrangler.jsonc`.
+
+```bash
+npm run deploy
+```
+
+Static pages and assets are served from `public/`. The GitHub Actions workflow runs `wrangler deploy` on pushes to `main`.
+
 ### Google OAuth
 
 Create OAuth credentials in Google Cloud Console and set the authorized redirect URI to:
