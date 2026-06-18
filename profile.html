@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subscriber Profile | Care Text</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg?v=bluepink3" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=bluepink3" sizes="any">
+  <style>
+    :root {
+      --ink: #20384f;
+      --rose: #cf7f9a;
+      --pink: #d97f9f;
+      --blue: #4f7fa6;
+      --paper: #fffdf8;
+      --line: rgba(32, 56, 79, .14);
+      --muted: rgba(32, 56, 79, .68);
+      --shadow: 0 24px 70px rgba(58, 76, 105, .12);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.58;
+      background:
+        radial-gradient(circle at 14% 16%, rgba(217, 127, 159, .22), transparent 30%),
+        radial-gradient(circle at 86% 74%, rgba(79, 127, 166, .22), transparent 34%),
+        linear-gradient(180deg, #fce7ef 0%, #dcecf6 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 16px 10%;
+      background: rgba(252, 231, 239, .94);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 40px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .brand img {
+      width: clamp(128px, 12vw, 174px);
+      height: auto;
+    }
+
+    .status-pill {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 10px 16px;
+      background: var(--ink);
+      color: #fffdf8;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    main {
+      padding: clamp(34px, 6vw, 78px) 10% clamp(54px, 8vw, 96px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, .86fr) minmax(300px, .54fr);
+      gap: clamp(28px, 5vw, 72px);
+      align-items: end;
+      margin-bottom: clamp(34px, 5vw, 62px);
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin-top: 0; }
+
+    h1 {
+      margin-bottom: 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7vw, 104px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.03;
+      text-wrap: balance;
+    }
+
+    h1 span { color: var(--rose); }
+
+    .lead {
+      max-width: 840px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: clamp(18px, 1.9vw, 25px);
+      font-weight: 680;
+    }
+
+    .note {
+      border: 1px solid rgba(217, 127, 159, .24);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: rgba(255, 253, 248, .78);
+      box-shadow: var(--shadow);
+      color: rgba(32, 56, 79, .78);
+      font-size: 14px;
+      font-weight: 760;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, .86);
+      box-shadow: var(--shadow);
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: minmax(220px, .34fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .license-box {
+      display: grid;
+      gap: 4px;
+    }
+
+    .license-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .license-name {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(26px, 3vw, 42px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: rgba(32, 56, 79, .78);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 11px 12px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+    }
+
+    button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: var(--ink);
+      color: #fffdf8;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .connection-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .connection-card {
+      overflow: hidden;
+    }
+
+    .connection-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      background: rgba(255, 245, 248, .68);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .connection-header h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(25px, 3vw, 42px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.05;
+    }
+
+    .connection-index {
+      color: var(--rose);
+    }
+
+    .connection-body {
+      display: grid;
+      gap: 22px;
+      padding: 18px;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .field-note {
+      margin: -12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 680;
+      line-height: 1.35;
+    }
+
+    .consent-check {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      border: 1px solid rgba(217, 127, 159, .22);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      background: rgba(255, 245, 248, .72);
+      color: rgba(32, 56, 79, .84);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .consent-check input {
+      width: 18px;
+      min-height: 18px;
+      margin: 2px 0 0;
+      accent-color: var(--pink);
+    }
+
+    .connection-string-box {
+      display: grid;
+      gap: 9px;
+      border: 1px solid rgba(32, 56, 79, .12);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: rgba(255, 255, 255, .74);
+    }
+
+    .connection-string-box label {
+      gap: 5px;
+    }
+
+    .connection-string-control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .connection-string-control input {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .copy-status {
+      min-height: 18px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .taxonomy-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .taxonomy-toolbar h3 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .taxonomy-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .taxonomy-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 170px;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid rgba(32, 56, 79, .10);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: rgba(255, 255, 255, .72);
+    }
+
+    .taxonomy-check {
+      display: grid;
+      grid-template-columns: 20px minmax(0, 1fr);
+      gap: 9px;
+      align-items: start;
+      color: var(--ink);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .taxonomy-check input {
+      width: 18px;
+      min-height: 18px;
+      margin: 2px 0 0;
+      accent-color: var(--pink);
+    }
+
+    .taxonomy-help {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 680;
+      line-height: 1.35;
+    }
+
+    .taxonomy-item select:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .actions {
+      position: sticky;
+      bottom: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      background: rgba(252, 231, 239, .94);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 -12px 40px rgba(58, 76, 105, .10);
+    }
+
+    .save-message {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    @media (max-width: 1100px) {
+      .hero,
+      .controls,
+      .fields,
+      .taxonomy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .taxonomy-item {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .top {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .brand {
+        align-items: flex-start;
+        flex-direction: column;
+        white-space: normal;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">
+      <img src="/assets/images/logo-header.webp?v=bluepink3" alt="Care Text">
+      <span>Subscriber profile</span>
+    </a>
+    <span class="status-pill">Direct access only</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Shape messages for every <span>connection.</span></h1>
+        <p class="lead">Add each connection's phone number, choose the relationship, pick encouragement categories, and set the rhythm. Messages are shaped by both taxonomy and relationship.</p>
+      </div>
+      <p class="note">This profile builder is not linked from the public site yet. Use direct access until SMS delivery is ready.</p>
+    </section>
+
+    <section class="panel controls" aria-label="Profile setup controls">
+      <div class="license-box">
+        <span class="license-label">License plan</span>
+        <span class="license-name" id="licenseName">Close Circle</span>
+      </div>
+      <div class="summary">
+        <span id="connectionSummary">0 of 3 connections configured</span>
+        <button type="button" id="addConnection">Add connection</button>
+      </div>
+    </section>
+
+    <section class="connection-list" id="connectionList" aria-label="Connections"></section>
+
+    <section class="actions" aria-label="Profile actions">
+      <p class="save-message" id="saveMessage">Changes save in this browser for review.</p>
+      <button type="button" id="saveProfile">Save profile</button>
+    </section>
+  </main>
+
+  <template id="connectionTemplate">
+    <article class="panel connection-card">
+      <header class="connection-header">
+        <h2><span class="connection-index"></span> Connection</h2>
+        <button type="button" class="remove-connection">Remove</button>
+      </header>
+      <div class="connection-body">
+        <div class="fields">
+          <label>Connection name
+            <input data-field="name" autocomplete="off" placeholder="Maya">
+          </label>
+          <label>Phone number
+            <input data-field="phoneNumber" type="tel" inputmode="tel" autocomplete="tel" placeholder="+15551234567" pattern="^\\+[1-9][0-9]{6,14}$" title="Use international E.164 format, such as +15551234567.">
+          </label>
+          <label>Sender name
+            <input data-field="senderName" autocomplete="off" placeholder="From Scott">
+          </label>
+          <label>Relationship type
+            <select data-field="relationship">
+              <option value="loved-one">1. Loved One</option>
+              <option value="close-friend">2. Close Friend</option>
+              <option value="friend">3. Friend</option>
+              <option value="mentor">4. Mentor</option>
+            </select>
+          </label>
+        </div>
+        <p class="field-note">Phone numbers use international format, starting with country code. Example: +15551234567.</p>
+        <label class="consent-check">
+          <input data-field="consentAcknowledged" type="checkbox">
+          <span>This connection is a friend or family member that has been notified that I will be sending them texts and I am aware that they will have to reply YES to an initial text message THAT I HAVE TO TEXT TO THEM MYSELF in order to opt in to receive further messages.</span>
+        </label>
+        <div class="connection-string-box">
+          <label>Connection string
+            <div class="connection-string-control">
+              <input class="connection-string" type="text" readonly>
+              <button type="button" class="copy-connection-string">Copy</button>
+            </div>
+          </label>
+          <p class="copy-status" aria-live="polite"></p>
+        </div>
+
+        <div class="taxonomy-toolbar">
+          <h3>Encouragement taxonomy and frequency</h3>
+          <button type="button" class="select-everyday">Select everyday basics</button>
+        </div>
+        <div class="taxonomy-grid"></div>
+      </div>
+    </article>
+  </template>
+
+  <script>
+    const TAXONOMY = [
+      ["morning_start", "Morning Start", "Begin the day with encouragement."],
+      ["goodnight_close", "Goodnight Close", "End the day feeling remembered."],
+      ["spouse_connection", "Spouse Connection", "Keep the connection strong."],
+      ["parent_appreciation", "Parent Appreciation", "Let parents know they matter."],
+      ["kids_encouragement", "Kids Encouragement", "Encourage them as they grow."],
+      ["friend_check_in", "Friend Check-In", "Lift up a friend without pressure."],
+      ["just_thinking_of_you", "Just Thinking of You", "A simple reminder of care."],
+      ["big_day_confidence", "Big Day Confidence", "Support before important moments."],
+      ["birthday_love", "Birthday Love", "Show up on special days."],
+      ["anniversary_gratitude", "Anniversary Gratitude", "Mark meaningful milestones."],
+      ["long_distance_closeness", "Long-Distance Closeness", "Stay close across distance."],
+      ["stressful_season", "Stressful Season", "Encouragement when life is heavy."],
+      ["faith_based_hope", "Faith-Based Hope", "Hope with faith language."],
+      ["nonreligious_hope", "Nonreligious Hope", "Hope without religious framing."],
+      ["grief_support", "Grief Support", "Tender support around loss."],
+      ["self_compassion", "Self-Compassion", "Permission to be gentle."],
+      ["celebrating_small_wins", "Celebrating Small Wins", "Notice small victories."],
+      ["hard_conversations", "Hard Conversations", "Care around difficult talks."],
+      ["weekend_reset", "Weekend Reset", "A reset for the week ahead."],
+      ["everyday_beauty", "Everyday Beauty", "Small moments of goodness."]
+    ];
+
+    const FREQUENCIES = [
+      ["daily", "Once per day"],
+      ["weekly", "Once per week"],
+      ["every_other_week", "Every other week"]
+    ];
+
+    const STORAGE_KEY = "careTextSubscriberProfileDraft";
+    const addConnection = document.querySelector("#addConnection");
+    const connectionList = document.querySelector("#connectionList");
+    const connectionTemplate = document.querySelector("#connectionTemplate");
+    const connectionSummary = document.querySelector("#connectionSummary");
+    const licenseName = document.querySelector("#licenseName");
+    const saveProfile = document.querySelector("#saveProfile");
+    const saveMessage = document.querySelector("#saveMessage");
+
+    let profile = loadProfile();
+
+    function loadProfile() {
+      const fallback = {
+        licenseLimit: 3,
+        connections: [blankConnection()]
+      };
+      try {
+        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+        if (!saved || !Array.isArray(saved.connections)) return fallback;
+        return {
+          licenseLimit: Number(saved.licenseLimit || saved.planLimit) === 10 ? 10 : 3,
+          connections: saved.connections.length ? saved.connections : [blankConnection()]
+        };
+      } catch {
+        return fallback;
+      }
+    }
+
+    function blankConnection() {
+      return {
+        name: "",
+        phoneNumber: "",
+        senderName: "",
+        relationship: "loved-one",
+        connectionString: createConnectionString(),
+        consentAcknowledged: false,
+        taxonomy: {}
+      };
+    }
+
+    function createConnectionString() {
+      const bytes = new Uint8Array(6);
+      if (window.crypto?.getRandomValues) {
+        crypto.getRandomValues(bytes);
+      } else {
+        bytes.forEach((_, index) => {
+          bytes[index] = Math.floor(Math.random() * 256);
+        });
+      }
+      const token = Array.from(bytes, byte => byte.toString(36).padStart(2, "0")).join("").toUpperCase();
+      return `CARETEXT-${token}`;
+    }
+
+    function normalizeConnection(connection) {
+      return {
+        ...blankConnection(),
+        ...connection,
+        connectionString: connection.connectionString || createConnectionString(),
+        taxonomy: connection.taxonomy || {}
+      };
+    }
+
+    function render() {
+      profile.connections = profile.connections.slice(0, profile.licenseLimit).map(normalizeConnection);
+      connectionList.innerHTML = "";
+      profile.connections.forEach((connection, index) => {
+        connectionList.appendChild(renderConnection(connection, index));
+      });
+      licenseName.textContent = profile.licenseLimit === 10 ? "Full Circle" : "Close Circle";
+      connectionSummary.textContent = `${profile.connections.length} of ${profile.licenseLimit} connections configured`;
+      addConnection.disabled = profile.connections.length >= profile.licenseLimit;
+    }
+
+    function renderConnection(connection, index) {
+      const fragment = connectionTemplate.content.cloneNode(true);
+      const card = fragment.querySelector(".connection-card");
+      card.dataset.index = index;
+      fragment.querySelector(".connection-index").textContent = `${index + 1}.`;
+      fragment.querySelector(".connection-string").value = connection.connectionString;
+
+      fragment.querySelectorAll("[data-field]").forEach(field => {
+        if (field.type === "checkbox") {
+          field.checked = Boolean(connection[field.dataset.field]);
+        } else {
+          field.value = connection[field.dataset.field] || "";
+        }
+        field.addEventListener("input", () => {
+          profile.connections[index][field.dataset.field] = field.type === "checkbox" ? field.checked : field.value;
+          markDirty();
+        });
+      });
+
+      fragment.querySelector(".copy-connection-string").addEventListener("click", async event => {
+        const status = card.querySelector(".copy-status");
+        try {
+          await navigator.clipboard.writeText(connection.connectionString);
+          status.textContent = "Copied.";
+        } catch {
+          card.querySelector(".connection-string").select();
+          document.execCommand("copy");
+          status.textContent = "Copied.";
+        }
+        event.currentTarget.textContent = "Copied";
+        window.setTimeout(() => {
+          event.currentTarget.textContent = "Copy";
+          status.textContent = "";
+        }, 1800);
+      });
+
+      fragment.querySelector(".remove-connection").addEventListener("click", () => {
+        profile.connections.splice(index, 1);
+        if (!profile.connections.length) profile.connections.push(blankConnection());
+        saveDraft();
+        render();
+      });
+
+      fragment.querySelector(".select-everyday").addEventListener("click", () => {
+        ["morning_start", "just_thinking_of_you", "friend_check_in", "everyday_beauty"].forEach(key => {
+          profile.connections[index].taxonomy[key] = profile.connections[index].taxonomy[key] || "weekly";
+        });
+        saveDraft();
+        render();
+      });
+
+      const grid = fragment.querySelector(".taxonomy-grid");
+      TAXONOMY.forEach(([key, name, help]) => {
+        grid.appendChild(renderTaxonomyItem(connection, index, key, name, help));
+      });
+
+      return fragment;
+    }
+
+    function renderTaxonomyItem(connection, connectionIndex, key, name, help) {
+      const item = document.createElement("div");
+      item.className = "taxonomy-item";
+
+      const checkboxId = `connection-${connectionIndex}-${key}`;
+      const checked = Boolean(connection.taxonomy[key]);
+      const frequency = connection.taxonomy[key] || "weekly";
+
+      item.innerHTML = `
+        <label class="taxonomy-check" for="${checkboxId}">
+          <input id="${checkboxId}" type="checkbox" ${checked ? "checked" : ""}>
+          <span>${name}<span class="taxonomy-help">${help}</span></span>
+        </label>
+        <select ${checked ? "" : "disabled"} aria-label="${name} frequency">
+          ${FREQUENCIES.map(([value, label]) => `<option value="${value}" ${frequency === value ? "selected" : ""}>${label}</option>`).join("")}
+        </select>
+      `;
+
+      const checkbox = item.querySelector("input");
+      const select = item.querySelector("select");
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          profile.connections[connectionIndex].taxonomy[key] = select.value;
+          select.disabled = false;
+        } else {
+          delete profile.connections[connectionIndex].taxonomy[key];
+          select.disabled = true;
+        }
+        markDirty();
+      });
+      select.addEventListener("change", () => {
+        profile.connections[connectionIndex].taxonomy[key] = select.value;
+        markDirty();
+      });
+      return item;
+    }
+
+    function saveDraft() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+      saveMessage.textContent = "Saved in this browser for review.";
+    }
+
+    function markDirty() {
+      saveMessage.textContent = "Unsaved changes.";
+    }
+
+    addConnection.addEventListener("click", () => {
+      if (profile.connections.length >= profile.licenseLimit) return;
+      profile.connections.push(blankConnection());
+      saveDraft();
+      render();
+    });
+
+    saveProfile.addEventListener("click", () => {
+      saveDraft();
+    });
+
+    render();
+  </script>
+</body>
+</html>
