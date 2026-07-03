@@ -4,11 +4,16 @@
   "main": "src/worker.js",
   "compatibility_date": "2026-06-18",
   "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
   },
   "routes": [
+    {
+      "pattern": "api.caretext.net",
+      "custom_domain": true
+    },
     {
       "pattern": "caretext.net/*",
       "zone_name": "caretext.net"

@@ -27,9 +27,9 @@
   <style>
     :root {
       --ink: #20384f;
-      --orange: #cf7f9a;
+      --rose: #cf7f9a;
       --pink: #d97f9f;
-      --green: #8aa5b8;
+      --slate: #8aa5b8;
       --blue: #4f7fa6;
       --purple: #9c83ad;
       --paper: #fffdf8;
@@ -63,9 +63,9 @@
       gap: 20px;
       padding: 16px 10%;
       border-bottom: 0;
-      background: transparent;
+      background: rgba(252, 231, 239, .94);
       color: var(--ink);
-      backdrop-filter: none;
+      backdrop-filter: blur(18px);
     }
 
     .brand {
@@ -84,6 +84,10 @@
       padding: 0;
       border-radius: var(--radius);
       background: transparent;
+    }
+
+    .brand span {
+      font-weight: 400;
     }
 
     .nav {
@@ -139,14 +143,13 @@
     #how,
     #pricing,
     #frequency,
-    #taxonomy,
-    #billing {
+    #taxonomy {
       scroll-margin-top: 112px;
     }
 
     .eyebrow {
       margin: 0 0 12px;
-      color: var(--orange);
+      color: var(--rose);
       font-size: 12px;
       font-weight: 950;
       letter-spacing: .14em;
@@ -167,12 +170,12 @@
       text-wrap: balance;
     }
 
-    h1 .orange { color: var(--orange); }
+    h1 .orange { color: var(--rose); }
 
     h2 {
       margin-bottom: 14px;
       font-size: clamp(34px, 5vw, 76px);
-      line-height: .92;
+      line-height: 1.04;
       letter-spacing: 0;
       text-wrap: balance;
     }
@@ -251,10 +254,42 @@
       min-height: min(58vw, 610px);
       display: grid;
       align-items: end;
-      background: url("/assets/images/primary-clean.webp") center / contain no-repeat;
+      overflow: visible;
+      background: transparent;
+    }
+
+    .hero-people {
+      position: absolute;
+      inset: 0 0 54px;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+      gap: clamp(10px, 1.2vw, 18px);
+    }
+
+    .hero-person {
+      position: relative;
+      display: block;
+      width: auto;
+      height: var(--h, min(43vw, 520px));
+      max-height: 520px;
+      min-width: 0;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 30px rgba(58, 76, 105, .10));
+    }
+
+    .hero-person.tall {
+      height: min(48vw, 580px);
+    }
+
+    .hero-person.couple {
+      height: min(42vw, 510px);
+      margin-inline: clamp(-18px, -1vw, -8px);
     }
 
     .speech {
+      position: relative;
+      z-index: 2;
       width: min(100%, 430px);
       margin: 0 auto clamp(28px, 5vw, 70px);
       border-radius: 18px;
@@ -368,27 +403,6 @@
       text-wrap: balance;
     }
 
-    .steps {
-      counter-reset: steps;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-
-    .step {
-      counter-increment: steps;
-      display: grid;
-      place-items: center;
-      min-height: 112px;
-      text-align: center;
-    }
-
-    .step::before {
-      content: none;
-    }
-
-    .step p,
     .messages p {
       color: var(--muted);
       font-weight: 650;
@@ -440,10 +454,6 @@
       color: var(--muted);
     }
 
-    .mini-icon {
-      display: none;
-    }
-
     .message-row p {
       margin: 0;
       color: var(--ink);
@@ -478,13 +488,17 @@
     }
 
     .tier {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
       border: 1px solid rgba(255, 245, 248, .26);
       border-radius: var(--radius);
       padding: 14px;
       background: rgba(255, 245, 248, .10);
+      text-align: center;
     }
 
     .tier .amount {
+      justify-content: center;
       margin: 0 0 6px;
     }
 
@@ -497,6 +511,24 @@
       color: rgba(255, 245, 248, .86);
       font-weight: 850;
       line-height: 1.25;
+    }
+
+    .tier .buy-link {
+      min-width: 0;
+      min-height: 42px;
+      width: 100%;
+      margin-top: 14px;
+      align-self: end;
+      background: #fffdf8;
+      color: var(--ink);
+    }
+
+    .launch-note {
+      margin: 0 0 16px;
+      color: rgba(255, 245, 248, .78);
+      font-size: 13px;
+      font-weight: 780;
+      line-height: 1.35;
     }
 
     .brush {
@@ -534,7 +566,7 @@
       height: 16px;
       margin-top: 4px;
       border-radius: 50%;
-      background: var(--green);
+      background: var(--slate);
       box-shadow: inset 0 0 0 5px #fff;
     }
 
@@ -543,8 +575,7 @@
     }
 
     .frequency .inner,
-    .taxonomy .inner,
-    .billing .inner {
+    .taxonomy .inner {
       display: grid;
       grid-template-columns: minmax(260px, .52fr) minmax(0, 1fr);
       gap: clamp(24px, 5vw, 70px);
@@ -570,8 +601,7 @@
       box-shadow: 0 14px 34px rgba(58, 76, 105, .06);
     }
 
-    .card p,
-    .billing p {
+    .card p {
       color: var(--muted);
       font-weight: 650;
       line-height: 1.52;
@@ -599,10 +629,6 @@
     .chip:nth-child(3n) { border-color: rgba(79, 127, 166, .30); }
     .chip:nth-child(3n + 1) { border-color: rgba(217, 127, 159, .30); }
     .chip:nth-child(3n + 2) { border-color: rgba(156, 131, 173, .28); }
-
-    .billing {
-      background: #fff;
-    }
 
     .start {
       background: linear-gradient(90deg, #ffdce7 0%, #ffdce7 44%, #29445f 44%, #29445f 100%);
@@ -690,7 +716,6 @@
       .workshop .inner,
       .frequency .inner,
       .taxonomy .inner,
-      .billing .inner,
       .start .inner {
         grid-template-columns: 1fr;
       }
@@ -775,6 +800,13 @@
           </div>
         </div>
         <div class="hero-visual" aria-label="Loved ones reading meaningful messages">
+          <div class="hero-people" aria-hidden="true">
+            <img class="hero-person" src="/assets/images/people/primary-01.webp" alt="" decoding="async">
+            <img class="hero-person tall" src="/assets/images/testimonials/secondary-05.webp" alt="" loading="lazy" decoding="async">
+            <img class="hero-person" src="/assets/images/people/primary-06.webp" alt="" loading="lazy" decoding="async">
+            <img class="hero-person couple" src="/assets/images/people/tertiary-08.webp" alt="" loading="lazy" decoding="async">
+            <img class="hero-person" src="/assets/images/people/tertiary-10.webp" alt="" loading="lazy" decoding="async">
+          </div>
           <div class="speech">It’s the little things that remind them they’re loved.</div>
         </div>
       </div>
@@ -789,8 +821,8 @@
         </div>
         <div class="relationship-grid">
           <div class="relationship"><div class="icon" style="background:var(--pink)">♥</div><strong>Spouse</strong><p>Keep the connection strong.</p></div>
-          <div class="relationship"><div class="icon" style="background:var(--orange)">👥</div><strong>Parents</strong><p>Let them know you’re thinking of them.</p></div>
-          <div class="relationship"><div class="icon" style="background:var(--green)">⟡</div><strong>Kids</strong><p>Encourage them every day.</p></div>
+          <div class="relationship"><div class="icon" style="background:var(--rose)">👥</div><strong>Parents</strong><p>Let them know you’re thinking of them.</p></div>
+          <div class="relationship"><div class="icon" style="background:var(--slate)">⟡</div><strong>Kids</strong><p>Encourage them every day.</p></div>
           <div class="relationship"><div class="icon" style="background:var(--blue)">🤝</div><strong>Friends</strong><p>Lift them up when they need it.</p></div>
           <div class="relationship"><div class="icon" style="background:var(--purple)">♡</div><strong>Anyone</strong><p>Birthdays, anniversaries, special days, and more.</p></div>
         </div>
@@ -820,18 +852,21 @@
           <div class="pricing-options">
             <div class="tier">
               <div class="amount"><strong>$4.99</strong><span>/ month</span></div>
-              <p>Up to 3 loved ones</p>
+              <p>Up to 3 loved ones / friends / connections</p>
+              <a class="button buy-link" href="https://buy.polar.sh/polar_cl_bbaW1XFCdx2IRVgcDZfq5mdRTNGVD3eW9svYF2IRdAB">Start Close Circle</a>
             </div>
             <div class="tier">
               <div class="amount"><strong>$9.99</strong><span>/ month</span></div>
               <p>Up to 10 loved ones / friends / connections</p>
+              <a class="button buy-link" href="https://buy.polar.sh/polar_cl_ZKINA0MWrAhTJdtbd2x27c203zYKoRNkWlmGW2IyhNO">Start Full Circle</a>
             </div>
           </div>
-          <div class="brush">Thoughtful messages to your loved ones</div>
+          <p class="launch-note">Subscriptions and license keys are live now. SMS delivery setup is pending AWS SNS.</p>
+          <div class="brush">Thoughtful messages to your loved ones &amp; connections</div>
           <ul class="feature-list">
             <li>Easy to set up</li>
             <li>Delivered year-round</li>
-            <li>Your words, at the right time</li>
+            <li>Your message at the right time</li>
             <li>For any relationship</li>
             <li>Private and secure</li>
           </ul>

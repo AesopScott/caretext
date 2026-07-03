@@ -138,7 +138,7 @@
 
     .controls {
       display: grid;
-      grid-template-columns: minmax(220px, .34fr) minmax(0, 1fr);
+      grid-template-columns: minmax(220px, .28fr) minmax(260px, .34fr) minmax(0, 1fr);
       gap: 18px;
       align-items: center;
       padding: 20px;
@@ -208,6 +208,11 @@
       color: var(--muted);
       font-size: 14px;
       font-weight: 800;
+    }
+
+    .subscriber-phone {
+      display: grid;
+      gap: 7px;
     }
 
     .connection-list {
@@ -284,35 +289,76 @@
       accent-color: var(--pink);
     }
 
-    .connection-string-box {
+    .opt-in-card {
       display: grid;
-      gap: 9px;
+      gap: 14px;
       border: 1px solid rgba(32, 56, 79, .12);
       border-radius: var(--radius);
-      padding: 14px;
+      padding: 18px;
       background: rgba(255, 255, 255, .74);
     }
 
-    .connection-string-box label {
-      gap: 5px;
+    .opt-in-card h3 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 2.5vw, 34px);
+      font-style: italic;
+      font-weight: 600;
+      line-height: 1.08;
     }
 
-    .connection-string-control {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px;
+    .opt-in-message {
+      margin: 0;
+      max-width: 900px;
+      color: rgba(32, 56, 79, .82);
+      font-size: clamp(16px, 1.5vw, 20px);
+      font-weight: 760;
+      line-height: 1.5;
+    }
+
+    .join-pill {
+      width: fit-content;
+      min-height: 44px;
+      display: inline-flex;
       align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 11px 20px;
+      background: var(--ink);
+      color: #fffdf8;
+      font-size: 15px;
+      font-weight: 900;
     }
 
-    .connection-string-control input {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    .copy-opt-in {
+      width: fit-content;
+    }
+
+    .opt-in-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .opt-in-footer {
+      margin: 0;
+      color: var(--muted);
       font-size: 14px;
-      font-weight: 800;
+      font-weight: 720;
+      line-height: 1.5;
+    }
+
+    .opt-in-footer a {
+      color: #2869c8;
+      font-weight: 900;
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     .copy-status {
       min-height: 18px;
-      margin: 0;
+      margin: -6px 0 0;
       color: var(--muted);
       font-size: 12px;
       font-weight: 760;
@@ -454,6 +500,10 @@
         <span class="license-label">License plan</span>
         <span class="license-name" id="licenseName">Close Circle</span>
       </div>
+      <label class="subscriber-phone">Subscriber phone
+        <input id="subscriberPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+15551234567" pattern="^\\+[1-9][0-9]{6,14}$" title="Use international E.164 format, such as +15551234567.">
+        <span class="taxonomy-help">Where Care Text sends the forwardable invite templates.</span>
+      </label>
       <div class="summary">
         <span id="connectionSummary">0 of 3 connections configured</span>
         <button type="button" id="addConnection">Add connection</button>
@@ -497,15 +547,17 @@
         <p class="field-note">Phone numbers use international format, starting with country code. Example: +15551234567.</p>
         <label class="consent-check">
           <input data-field="consentAcknowledged" type="checkbox">
-          <span>This connection is a friend or family member that has been notified that I will be sending them texts and I am aware that they will have to reply YES to an initial text message THAT I HAVE TO TEXT TO THEM MYSELF in order to opt in to receive further messages.</span>
+          <span>This connection is a friend or family member. I understand Care Text will send the invitation message to my phone first, and I will forward it to this connection myself. They will have to text JOIN to the Care Text number before receiving Care Text messages.</span>
         </label>
-        <div class="connection-string-box">
-          <label>Connection string
-            <div class="connection-string-control">
-              <input class="connection-string" type="text" readonly>
-              <button type="button" class="copy-connection-string">Copy</button>
-            </div>
-          </label>
+        <div class="opt-in-card">
+          <h3>Invitation text</h3>
+          <p class="opt-in-message"></p>
+          <span class="join-pill">Text JOIN to [Care Text Number]</span>
+          <p class="opt-in-footer">Message frequency may vary. Message and data rates may apply. Reply HELP for help or STOP to opt out. <a href="/terms.html">Terms of Service</a> · <a href="/privacy.html">Privacy Policy</a></p>
+          <div class="opt-in-actions">
+            <button type="button" class="send-invite">Text invite to my phone</button>
+            <button type="button" class="copy-opt-in">Copy invitation text</button>
+          </div>
           <p class="copy-status" aria-live="polite"></p>
         </div>
 
@@ -549,11 +601,13 @@
     ];
 
     const STORAGE_KEY = "careTextSubscriberProfileDraft";
+    const CARE_TEXT_NUMBER = "[Care Text Number]";
     const addConnection = document.querySelector("#addConnection");
     const connectionList = document.querySelector("#connectionList");
     const connectionTemplate = document.querySelector("#connectionTemplate");
     const connectionSummary = document.querySelector("#connectionSummary");
     const licenseName = document.querySelector("#licenseName");
+    const subscriberPhone = document.querySelector("#subscriberPhone");
     const saveProfile = document.querySelector("#saveProfile");
     const saveMessage = document.querySelector("#saveMessage");
 
@@ -562,6 +616,7 @@
     function loadProfile() {
       const fallback = {
         licenseLimit: 3,
+        subscriberPhone: "",
         connections: [blankConnection()]
       };
       try {
@@ -569,6 +624,7 @@
         if (!saved || !Array.isArray(saved.connections)) return fallback;
         return {
           licenseLimit: Number(saved.licenseLimit || saved.planLimit) === 10 ? 10 : 3,
+          subscriberPhone: saved.subscriberPhone || "",
           connections: saved.connections.length ? saved.connections : [blankConnection()]
         };
       } catch {
@@ -582,36 +638,22 @@
         phoneNumber: "",
         senderName: "",
         relationship: "loved-one",
-        connectionString: createConnectionString(),
         consentAcknowledged: false,
         taxonomy: {}
       };
-    }
-
-    function createConnectionString() {
-      const bytes = new Uint8Array(6);
-      if (window.crypto?.getRandomValues) {
-        crypto.getRandomValues(bytes);
-      } else {
-        bytes.forEach((_, index) => {
-          bytes[index] = Math.floor(Math.random() * 256);
-        });
-      }
-      const token = Array.from(bytes, byte => byte.toString(36).padStart(2, "0")).join("").toUpperCase();
-      return `CARETEXT-${token}`;
     }
 
     function normalizeConnection(connection) {
       return {
         ...blankConnection(),
         ...connection,
-        connectionString: connection.connectionString || createConnectionString(),
         taxonomy: connection.taxonomy || {}
       };
     }
 
     function render() {
       profile.connections = profile.connections.slice(0, profile.licenseLimit).map(normalizeConnection);
+      subscriberPhone.value = profile.subscriberPhone || "";
       connectionList.innerHTML = "";
       profile.connections.forEach((connection, index) => {
         connectionList.appendChild(renderConnection(connection, index));
@@ -626,7 +668,7 @@
       const card = fragment.querySelector(".connection-card");
       card.dataset.index = index;
       fragment.querySelector(".connection-index").textContent = `${index + 1}.`;
-      fragment.querySelector(".connection-string").value = connection.connectionString;
+      updateOptInCard(fragment, connection);
 
       fragment.querySelectorAll("[data-field]").forEach(field => {
         if (field.type === "checkbox") {
@@ -636,25 +678,29 @@
         }
         field.addEventListener("input", () => {
           profile.connections[index][field.dataset.field] = field.type === "checkbox" ? field.checked : field.value;
+          updateOptInCard(card, profile.connections[index]);
           markDirty();
         });
       });
 
-      fragment.querySelector(".copy-connection-string").addEventListener("click", async event => {
+      fragment.querySelector(".copy-opt-in").addEventListener("click", async event => {
         const status = card.querySelector(".copy-status");
+        const text = buildOptInText(profile.connections[index]);
         try {
-          await navigator.clipboard.writeText(connection.connectionString);
+          await navigator.clipboard.writeText(text);
           status.textContent = "Copied.";
         } catch {
-          card.querySelector(".connection-string").select();
-          document.execCommand("copy");
-          status.textContent = "Copied.";
+          status.textContent = "Copy failed. Select the invitation text manually.";
         }
         event.currentTarget.textContent = "Copied";
         window.setTimeout(() => {
-          event.currentTarget.textContent = "Copy";
+          event.currentTarget.textContent = "Copy invitation text";
           status.textContent = "";
         }, 1800);
+      });
+
+      fragment.querySelector(".send-invite").addEventListener("click", event => {
+        sendInviteToSubscriber(event.currentTarget, card, index);
       });
 
       fragment.querySelector(".remove-connection").addEventListener("click", () => {
@@ -678,6 +724,86 @@
       });
 
       return fragment;
+    }
+
+    function selectedMessageType(connection) {
+      const selected = TAXONOMY
+        .filter(([key]) => Boolean(connection.taxonomy?.[key]))
+        .map(([, name]) => name.toLowerCase());
+      if (!selected.length) return "encouragement";
+      if (selected.length === 1) return selected[0];
+      if (selected.length === 2) return `${selected[0]} and ${selected[1]}`;
+      return `${selected.slice(0, 2).join(", ")}, and other encouragement`;
+    }
+
+    function displayName(value, fallback) {
+      return (value || "").trim() || fallback;
+    }
+
+    function buildOptInText(connection) {
+      const connectionName = displayName(connection.name, "[connection name]");
+      const senderName = displayName(connection.senderName, "[sender name]");
+      const messageType = selectedMessageType(connection);
+      return `Hi ${connectionName}, It's ${senderName} and I want to send you periodic ${messageType} messages through Care Text to tell you I care and to stay connected.\n\nTo accept, text JOIN to ${CARE_TEXT_NUMBER}.\n\nMessage frequency may vary. Message and data rates may apply. Reply HELP for help or STOP to opt out. Terms: https://caretext.net/terms.html Privacy: https://caretext.net/privacy.html`;
+    }
+
+    function buildSubscriberInviteText(connection) {
+      const connectionName = displayName(connection.name, "[connection name]");
+      const senderName = displayName(connection.senderName, "[sender name]");
+      return `Care Text invite for ${connectionName}:\n\n${buildOptInText({ ...connection, name: connectionName, senderName })}\n\nForward this to ${connectionName} from your own phone.`;
+    }
+
+    function updateOptInCard(scope, connection) {
+      const message = scope.querySelector(".opt-in-message");
+      if (!message) return;
+      message.textContent = buildOptInText(connection).split("\n\n")[0];
+    }
+
+    async function sendInviteToSubscriber(button, card, index) {
+      const status = card.querySelector(".copy-status");
+      const connection = profile.connections[index];
+      const phone = (profile.subscriberPhone || "").trim();
+      if (!/^\+[1-9]\d{6,14}$/.test(phone)) {
+        status.textContent = "Add your subscriber phone in international format first.";
+        subscriberPhone.focus();
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "Sending...";
+      status.textContent = "";
+
+      const payload = {
+        subscriberPhone: phone,
+        connectionName: displayName(connection.name, "[connection name]"),
+        senderName: displayName(connection.senderName, "[sender name]"),
+        messageType: selectedMessageType(connection),
+        previewMessage: buildSubscriberInviteText(connection)
+      };
+
+      try {
+        const response = await fetch("/api/subscriber-invites/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        if (response.ok) {
+          status.textContent = result.dryRun ? "Invite template is ready; SMS sending is still in dry-run mode." : "Invite text sent to your phone.";
+        } else if (response.status === 401) {
+          status.textContent = "Sign in before sending invite texts from Care Text.";
+        } else if (result.message) {
+          status.textContent = result.message;
+        } else {
+          status.textContent = result.error || "Invite could not be sent yet.";
+        }
+      } catch {
+        status.textContent = "Could not reach Care Text sending service.";
+      } finally {
+        button.disabled = false;
+        button.textContent = "Text invite to my phone";
+      }
     }
 
     function renderTaxonomyItem(connection, connectionIndex, key, name, help) {
@@ -708,10 +834,12 @@
           delete profile.connections[connectionIndex].taxonomy[key];
           select.disabled = true;
         }
+        updateOptInCard(item.closest(".connection-card"), profile.connections[connectionIndex]);
         markDirty();
       });
       select.addEventListener("change", () => {
         profile.connections[connectionIndex].taxonomy[key] = select.value;
+        updateOptInCard(item.closest(".connection-card"), profile.connections[connectionIndex]);
         markDirty();
       });
       return item;
@@ -731,6 +859,11 @@
       profile.connections.push(blankConnection());
       saveDraft();
       render();
+    });
+
+    subscriberPhone.addEventListener("input", () => {
+      profile.subscriberPhone = subscriberPhone.value;
+      markDirty();
     });
 
     saveProfile.addEventListener("click", () => {

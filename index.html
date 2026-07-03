@@ -9,27 +9,27 @@
   <meta property="og:description" content="A message can change the shape of a day.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://caretext.net/">
-  <meta property="og:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink2">
-  <meta property="og:image:secure_url" content="https://caretext.net/assets/og-caretext.png?v=bluepink2">
+  <meta property="og:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <meta property="og:image:secure_url" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Care Text">
   <meta name="twitter:description" content="A message can change the shape of a day.">
-  <meta name="twitter:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink2">
-  <link rel="image_src" href="/assets/og-caretext.png?v=bluepink2">
-  <link rel="alternate" type="image/svg+xml" href="/assets/og-caretext.svg?v=bluepink2">
-  <link rel="icon" href="/favicon.svg?v=bluepink2" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico?v=bluepink2" sizes="any">
-  <link rel="icon" href="/favicon-32.png?v=bluepink2" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/favicon-180.png?v=bluepink2">
+  <meta name="twitter:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <link rel="image_src" href="/assets/og-caretext.png?v=bluepink3">
+  <link rel="alternate" type="image/svg+xml" href="/assets/og-caretext.svg?v=bluepink3">
+  <link rel="icon" href="/favicon.svg?v=bluepink3" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=bluepink3" sizes="any">
+  <link rel="icon" href="/favicon-32.png?v=bluepink3" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/favicon-180.png?v=bluepink3">
   <style>
     :root {
       --ink: #20384f;
-      --orange: #cf7f9a;
+      --rose: #cf7f9a;
       --pink: #d97f9f;
-      --green: #8aa5b8;
+      --slate: #8aa5b8;
       --blue: #4f7fa6;
       --paper: #fffdf8;
       --mist: #f6f8f3;
@@ -92,30 +92,40 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      padding: 22px 10%;
+      padding: 16px 10%;
       border-bottom: 0;
-      background: transparent;
-      backdrop-filter: none;
+      background: rgba(252, 231, 239, .94);
+      backdrop-filter: blur(18px);
     }
 
     .brand {
       display: flex;
       align-items: center;
       justify-content: center;
+      gap: 16px;
       min-width: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 40px);
+      font-style: italic;
+      line-height: 1;
+      white-space: nowrap;
       font-weight: 950;
       text-align: left;
       color: var(--ink);
     }
 
     .brand img {
-      width: clamp(158px, 15vw, 210px);
+      width: clamp(128px, 12vw, 174px);
       height: auto;
       flex: 0 0 auto;
       padding: 0;
       border-radius: 8px;
       background: transparent;
       box-shadow: none;
+    }
+
+    .brand span {
+      font-weight: 400;
     }
 
     .nav-link {
@@ -163,12 +173,12 @@
     }
 
     .scene-wrap {
-      min-height: calc(100vh - 108px);
+      min-height: auto;
       display: grid;
       align-content: center;
       justify-items: center;
       gap: clamp(24px, 4vw, 48px);
-      padding: 6px 10% clamp(54px, 8vw, 96px);
+      padding: clamp(22px, 4vw, 52px) 10% clamp(54px, 8vw, 96px);
       overflow: hidden;
     }
 
@@ -321,8 +331,9 @@
       height: 10px;
       flex: 0 0 auto;
       border-radius: 50%;
-      background: var(--accent, var(--orange));
-      box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent, var(--orange)) 16%, transparent);
+      background: var(--accent, var(--rose));
+      box-shadow: 0 0 0 5px rgba(217, 127, 159, .16);
+      box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent, var(--rose)) 16%, transparent);
     }
 
     .bubble-text {
@@ -589,6 +600,12 @@
         gap: 14px;
       }
 
+      .brand {
+        align-items: flex-start;
+        flex-direction: column;
+        white-space: normal;
+      }
+
       button {
         min-height: 38px;
         padding: 8px 11px;
@@ -611,7 +628,8 @@
   <main class="page-shell">
     <header class="toolbar" aria-label="Care Text navigation">
       <div class="brand">
-        <img src="assets/images/logo-header.png?v=bluepink2" alt="Care Text">
+        <img src="assets/images/logo-header.png?v=bluepink3" alt="Care Text">
+        <span>Say the thing that matters.</span>
       </div>
       <nav class="nav" aria-label="Primary navigation">
         <a class="nav-link" href="/learn-more.html">Learn more</a>
@@ -620,33 +638,32 @@
     </header>
 
     <section class="scene-wrap" aria-label="Care Text messages for loved ones">
-      <div class="scene" id="scene">
-        <img class="person-image is-active" data-slot="1" data-set="primary" src="assets/images/people/primary-01.png" alt="" style="left:2.494%; top:12.009%; width:7.937%; height:63.075%;">
-        <img class="person-image" data-slot="1" data-set="tertiary" src="assets/images/people/tertiary-01.png" alt="" style="left:2.537%; top:13.416%; width:8.568%; height:65.614%;">
-        <img class="person-image is-active" data-slot="2" data-set="primary" src="assets/images/people/primary-02.png" alt="" style="left:11.224%; top:15.713%; width:8.844%; height:63.973%;">
-        <img class="person-image" data-slot="2" data-set="tertiary" src="assets/images/people/tertiary-02.png" alt="" style="left:12.120%; top:16.911%; width:8.061%; height:65.389%;">
-        <img class="person-image is-active" data-slot="3" data-set="primary" src="assets/images/people/primary-03.png" alt="" style="left:21.259%; top:20.426%; width:8.503%; height:59.596%;">
-        <img class="person-image" data-slot="3" data-set="tertiary" src="assets/images/people/tertiary-03.png" alt="" style="left:21.477%; top:21.646%; width:8.681%; height:61.218%;">
-        <img class="person-image is-active" data-slot="4" data-set="primary" src="assets/images/people/primary-04.png" alt="" style="left:30.896%; top:15.937%; width:8.390%; height:63.973%;">
-        <img class="person-image" data-slot="4" data-set="tertiary" src="assets/images/people/tertiary-04.png" alt="" style="left:31.172%; top:18.828%; width:8.399%; height:65.614%;">
-        <img class="person-image is-active" data-slot="5" data-set="primary" src="assets/images/people/primary-05.png" alt="" style="left:40.533%; top:21.998%; width:8.390%; height:60.045%;">
-        <img class="person-image" data-slot="5" data-set="tertiary" src="assets/images/people/tertiary-05.png" alt="" style="left:40.530%; top:22.886%; width:8.681%; height:61.218%;">
-        <img class="person-image is-active" data-slot="6" data-set="primary" src="assets/images/people/primary-06.png" alt="" style="left:50.170%; top:17.284%; width:8.787%; height:67.565%;">
-        <img class="person-image" data-slot="6" data-set="tertiary" src="assets/images/people/tertiary-06.png" alt="" style="left:50.225%; top:23.563%; width:8.794%; height:63.472%;">
-        <img class="person-image is-active" data-slot="7" data-set="primary" src="assets/images/people/primary-07.png" alt="" style="left:59.977%; top:17.396%; width:8.277%; height:63.075%;">
-        <img class="person-image" data-slot="7" data-set="tertiary" src="assets/images/people/tertiary-07.png" alt="" style="left:59.977%; top:17.926%; width:8.512%; height:65.727%;">
-        <img class="person-image is-active" data-slot="8" data-set="primary" src="assets/images/people/primary-08.png" alt="" style="left:69.331%; top:15.713%; width:9.921%; height:63.861%;">
-        <img class="person-image" data-slot="8" data-set="tertiary" src="assets/images/people/tertiary-08.png" alt="" style="left:69.617%; top:18.151%; width:9.696%; height:65.502%;">
-        <img class="person-image is-active" data-slot="9" data-set="primary" src="assets/images/people/primary-09.png" alt="" style="left:80.329%; top:21.998%; width:8.163%; height:60.831%;">
-        <img class="person-image" data-slot="9" data-set="tertiary" src="assets/images/people/tertiary-09.png" alt="" style="left:80.327%; top:22.886%; width:8.343%; height:62.232%;">
-        <img class="person-image is-active" data-slot="10" data-set="primary" src="assets/images/people/primary-10.png" alt="" style="left:89.116%; top:16.723%; width:8.617%; height:59.933%;">
-        <img class="person-image" data-slot="10" data-set="tertiary" src="assets/images/people/tertiary-10.png" alt="" style="left:89.628%; top:24.126%; width:8.343%; height:63.360%;">
-        <div class="bubble-layer" id="bubbleLayer" aria-hidden="true"></div>
-      </div>
       <div class="scene-copy">
-        <h1>Say the thing that matters.</h1>
         <p>Choose the people you care about, pick the kind of encouragement they need, and CareText keeps thoughtful messages going.</p>
-        <a class="scene-cta" href="/learn-more.html#how-it-works">See how it works</a>
+        <a class="scene-cta" href="/learn-more.html#how">See how it works</a>
+      </div>
+      <div class="scene" id="scene">
+        <img class="person-image is-active" data-slot="1" data-set="primary" src="assets/images/people/primary-01.png" alt="" decoding="async" style="left:2.494%; top:12.009%; width:7.937%; height:63.075%;">
+        <img class="person-image" data-slot="1" data-set="tertiary" src="assets/images/people/tertiary-01.png" alt="" loading="lazy" decoding="async" style="left:2.537%; top:13.416%; width:8.568%; height:65.614%;">
+        <img class="person-image is-active" data-slot="2" data-set="primary" src="assets/images/people/primary-02.png" alt="" decoding="async" style="left:11.224%; top:15.713%; width:8.844%; height:63.973%;">
+        <img class="person-image" data-slot="2" data-set="tertiary" src="assets/images/people/tertiary-02.png" alt="" loading="lazy" decoding="async" style="left:12.120%; top:16.911%; width:8.061%; height:65.389%;">
+        <img class="person-image is-active" data-slot="3" data-set="primary" src="assets/images/people/primary-03.png" alt="" decoding="async" style="left:21.259%; top:20.426%; width:8.503%; height:59.596%;">
+        <img class="person-image" data-slot="3" data-set="tertiary" src="assets/images/people/tertiary-03.png" alt="" loading="lazy" decoding="async" style="left:21.477%; top:21.646%; width:8.681%; height:61.218%;">
+        <img class="person-image is-active" data-slot="4" data-set="primary" src="assets/images/people/primary-04.png" alt="" decoding="async" style="left:30.896%; top:15.937%; width:8.390%; height:63.973%;">
+        <img class="person-image" data-slot="4" data-set="tertiary" src="assets/images/people/tertiary-04.png" alt="" loading="lazy" decoding="async" style="left:31.172%; top:18.828%; width:8.399%; height:65.614%;">
+        <img class="person-image is-active" data-slot="5" data-set="primary" src="assets/images/people/primary-05.png" alt="" decoding="async" style="left:40.533%; top:21.998%; width:8.390%; height:60.045%;">
+        <img class="person-image" data-slot="5" data-set="tertiary" src="assets/images/people/tertiary-05.png" alt="" loading="lazy" decoding="async" style="left:40.530%; top:22.886%; width:8.681%; height:61.218%;">
+        <img class="person-image is-active" data-slot="6" data-set="primary" src="assets/images/people/primary-06.png" alt="" decoding="async" style="left:50.170%; top:17.284%; width:8.787%; height:67.565%;">
+        <img class="person-image" data-slot="6" data-set="tertiary" src="assets/images/people/tertiary-06.png" alt="" loading="lazy" decoding="async" style="left:50.225%; top:23.563%; width:8.794%; height:63.472%;">
+        <img class="person-image is-active" data-slot="7" data-set="primary" src="assets/images/people/primary-07.png" alt="" decoding="async" style="left:59.977%; top:17.396%; width:8.277%; height:63.075%;">
+        <img class="person-image" data-slot="7" data-set="tertiary" src="assets/images/people/tertiary-07.png" alt="" loading="lazy" decoding="async" style="left:59.977%; top:17.926%; width:8.512%; height:65.727%;">
+        <img class="person-image is-active" data-slot="8" data-set="primary" src="assets/images/people/primary-08.png" alt="" decoding="async" style="left:69.331%; top:15.713%; width:9.921%; height:63.861%;">
+        <img class="person-image" data-slot="8" data-set="tertiary" src="assets/images/people/tertiary-08.png" alt="" loading="lazy" decoding="async" style="left:69.617%; top:18.151%; width:9.696%; height:65.502%;">
+        <img class="person-image is-active" data-slot="9" data-set="primary" src="assets/images/people/primary-09.png" alt="" decoding="async" style="left:80.329%; top:21.998%; width:8.163%; height:60.831%;">
+        <img class="person-image" data-slot="9" data-set="tertiary" src="assets/images/people/tertiary-09.png" alt="" loading="lazy" decoding="async" style="left:80.327%; top:22.886%; width:8.343%; height:62.232%;">
+        <img class="person-image is-active" data-slot="10" data-set="primary" src="assets/images/people/primary-10.png" alt="" decoding="async" style="left:89.116%; top:16.723%; width:8.617%; height:59.933%;">
+        <img class="person-image" data-slot="10" data-set="tertiary" src="assets/images/people/tertiary-10.png" alt="" loading="lazy" decoding="async" style="left:89.628%; top:24.126%; width:8.343%; height:63.360%;">
+        <div class="bubble-layer" id="bubbleLayer" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -660,7 +677,7 @@
       </div>
 
       <div class="story-row">
-        <img class="testimonial-photo person-crop" src="assets/images/testimonials/secondary-07.png?v=bluepink2" alt="A smiling couple reading a Care Text message together">
+        <img class="testimonial-photo person-crop" src="assets/images/testimonials/secondary-07.png?v=bluepink3" alt="A smiling couple reading a Care Text message together" loading="lazy" decoding="async">
         <div class="testimonial-copy">
           <p class="eyebrow">Staying close</p>
           <blockquote>"My husband and I meant to say these things, but busy weeks kept swallowing them. Care Text helped our words actually arrive."</blockquote>
@@ -670,7 +687,7 @@
       </div>
 
       <div class="story-row is-reversed">
-        <img class="testimonial-photo person-crop" src="assets/images/testimonials/secondary-03.png?v=bluepink2" alt="A smiling person reading a thoughtful text message">
+        <img class="testimonial-photo person-crop" src="assets/images/testimonials/secondary-03.png?v=bluepink3" alt="A smiling person reading a thoughtful text message" loading="lazy" decoding="async">
         <div class="testimonial-copy">
           <p class="eyebrow">The little things</p>
           <blockquote>"It was not a huge gesture. It was just the right sentence on a hard morning. That changed the whole day."</blockquote>
@@ -680,7 +697,7 @@
       </div>
 
       <div class="story-row">
-        <img class="testimonial-photo person-crop" src="assets/images/testimonials/secondary-05.png?v=bluepink2" alt="A smiling person in a yellow hoodie reading a thoughtful text message">
+        <img class="testimonial-photo person-crop" src="assets/images/testimonials/secondary-05.png?v=bluepink3" alt="A smiling person in a yellow hoodie reading a thoughtful text message" loading="lazy" decoding="async">
         <div class="testimonial-copy">
           <p class="eyebrow">Across relationships</p>
           <blockquote>"I used it for my mom, my best friend, and my son. Each message sounded like me, but it arrived when I would have forgotten."</blockquote>
@@ -758,7 +775,12 @@
     }
 
     function shuffle(items) {
-      return [...items].sort(() => Math.random() - 0.5);
+      const shuffled = [...items];
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+      }
+      return shuffled;
     }
 
     function randomBetween(min, max) {
@@ -890,17 +912,21 @@
     }
 
     function tweenBubble(bubble, direction, onDone) {
-      const startedAt = Date.now();
-      window.clearInterval(bubble._fadeTimer);
-      bubble._fadeTimer = window.setInterval(() => {
-        const progress = Math.min(1, (Date.now() - startedAt) / loopState.fadeMs);
+      const startedAt = performance.now();
+      if (bubble._fadeFrame) {
+        window.cancelAnimationFrame(bubble._fadeFrame);
+      }
+      const tick = now => {
+        const progress = Math.min(1, (now - startedAt) / loopState.fadeMs);
         setBubbleVisual(bubble, progress, direction);
         if (progress >= 1) {
-          window.clearInterval(bubble._fadeTimer);
           if (onDone) onDone();
+          return;
         }
-      }, 50);
+        bubble._fadeFrame = window.requestAnimationFrame(tick);
+      };
       setBubbleVisual(bubble, 0, direction);
+      bubble._fadeFrame = window.requestAnimationFrame(tick);
     }
 
     function renderPair() {

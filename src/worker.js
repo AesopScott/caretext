@@ -3,6 +3,18 @@ const GOOGLE_STATE_COOKIE = "ct_google_state";
 const SESSION_DAYS = 30;
 const MAX_RECIPIENTS = 10;
 const FREQUENCIES = new Set(["daily", "weekly", "every_other_week"]);
+const POLAR_PLANS = {
+  "558191f1-142c-4f6d-9fba-e37762e9172e": { key: "starter", name: "Care Text Starter", maxRecipients: 3 },
+  "7b70bf10-db14-42f1-95f2-741ea82a42fc": { key: "family", name: "Care Text Family", maxRecipients: 10 }
+};
+const POLAR_BENEFITS = {
+  "b7a6a2ca-56e0-4b3f-b21d-40c55c97a5c4": { key: "starter", name: "Care Text Starter", maxRecipients: 3 },
+  "b58fd02b-cfb2-4d7c-b141-308464bd2058": { key: "family", name: "Care Text Family", maxRecipients: 10 }
+};
+const POLAR_CHECKOUT_LINKS = {
+  starter: "https://buy.polar.sh/polar_cl_bbaW1XFCdx2IRVgcDZfq5mdRTNGVD3eW9svYF2IRdAB",
+  family: "https://buy.polar.sh/polar_cl_ZKINA0MWrAhTJdtbd2x27c203zYKoRNkWlmGW2IyhNO"
+};
 
 export default {
   async fetch(request, env, ctx) {
@@ -49,12 +61,16 @@ async function handleApi(request, env, ctx, url) {
   if (route === "GET /api/auth/google/start") return googleStart(request, env, url);
   if (route === "GET /api/auth/google/callback") return googleCallback(request, env, url);
   if (route === "GET /api/taxonomy") return listTaxonomy(env);
+  if (route === "POST /api/webhooks/polar") return polarWebhook(request, env);
 
   const session = await requireSession(request, env);
   if (session instanceof Response) return session;
 
   if (route === "GET /api/profile") return getProfile(env, session.userId);
+  if (route === "GET /api/billing/license") return getBillingLicense(env, session.userId);
+  if (route === "POST /api/billing/checkout") return createBillingCheckout(request, env, session.userId);
   if (route === "PUT /api/profile") return updateProfile(request, env, session.userId);
+  if (route === "POST /api/subscriber-invites/send") return sendSubscriberInvite(request, env, session.userId);
   if (route === "GET /api/recipients") return listRecipients(env, session.userId);
   if (route === "POST /api/recipients") return createRecipient(request, env, session.userId);
 
@@ -131,6 +147,7 @@ async function logout(request, env) {
 async function me(request, env) {
   const session = await requireSession(request, env);
   if (session instanceof Response) return json({ user: null }, 200);
+  await linkLicensesForUser(env, session.userId);
   return json({ user: await loadUser(env, session.userId) });
 }
 
@@ -236,6 +253,33 @@ async function getProfile(env, userId) {
   return json({ profile });
 }
 
+async function getBillingLicense(env, userId) {
+  await linkLicensesForUser(env, userId);
+  const licenses = await env.DB.prepare(
+    `SELECT plan, status, product_name AS productName, license_key_display AS licenseKeyDisplay,
+      granted_at AS grantedAt, revoked_at AS revokedAt, subscription_id AS subscriptionId
+     FROM user_licenses
+     WHERE user_id = ?
+     ORDER BY CASE status WHEN 'active' THEN 0 WHEN 'pending' THEN 1 ELSE 2 END, updated_at DESC`
+  ).bind(userId).all();
+
+  const rows = licenses.results || [];
+  const active = rows.find(row => row.status === "active");
+  const plan = active ? planDetails(active.plan) : null;
+  return json({
+    active: Boolean(active),
+    plan,
+    licenses: rows.map(row => ({ ...row, plan: planDetails(row.plan) }))
+  });
+}
+
+async function createBillingCheckout(request, env, userId) {
+  const body = await readJson(request);
+  const requestedPlan = cleanString(body.plan, 24).toLowerCase();
+  const plan = requestedPlan === "family" ? "family" : "starter";
+  return json({ url: POLAR_CHECKOUT_LINKS[plan], plan: planDetails(plan) });
+}
+
 async function updateProfile(request, env, userId) {
   const body = await readJson(request);
   const firstName = cleanString(body.firstName, 80);
@@ -248,6 +292,107 @@ async function updateProfile(request, env, userId) {
   ).bind(firstName, lastName, timezone, phoneNumber, userId).run();
 
   return getProfile(env, userId);
+}
+
+async function sendSubscriberInvite(request, env, userId) {
+  const body = await readJson(request);
+  const subscriberPhone = normalizeE164(body.subscriberPhone);
+  const connectionName = cleanString(body.connectionName, 100) || "your connection";
+  const senderName = cleanString(body.senderName, 100) || "someone who cares about you";
+  const messageType = cleanString(body.messageType, 180) || "encouragement";
+  const careTextNumber = cleanString(env.CARE_TEXT_NUMBER || body.careTextNumber, 40) || "[Care Text Number]";
+
+  if (!subscriberPhone) {
+    return json({ error: "Subscriber phone number must use E.164 format, such as +15551234567." }, 400);
+  }
+
+  const message = buildSubscriberInviteMessage({ connectionName, senderName, messageType, careTextNumber });
+  const result = await sendSms(env, subscriberPhone, message);
+
+  return json({
+    ...result,
+    to: subscriberPhone,
+    message
+  }, result.ok ? 200 : result.status || 501);
+}
+
+function buildSubscriberInviteMessage({ connectionName, senderName, messageType, careTextNumber }) {
+  return `Care Text invite for ${connectionName}:
+
+Hi ${connectionName}, it's ${senderName}. I want to send you periodic ${messageType} messages through Care Text to tell you I care and to stay connected.
+
+To accept, text JOIN to ${careTextNumber}.
+
+Message frequency may vary. Message and data rates may apply. Reply HELP for help or STOP to opt out.
+
+Forward this to ${connectionName} from your own phone.`;
+}
+
+async function sendSms(env, to, message) {
+  if (env.SMS_DRY_RUN === "true") return { ok: true, dryRun: true, provider: "dry-run" };
+
+  const region = cleanString(env.AWS_SMS_REGION, 40) || cleanString(env.AWS_REGION, 40) || "us-east-2";
+  const accessKeyId = cleanString(env.AWS_ACCESS_KEY_ID, 160);
+  const secretAccessKey = cleanString(env.AWS_SECRET_ACCESS_KEY, 240);
+  const sessionToken = cleanString(env.AWS_SESSION_TOKEN, 2000);
+  const originationIdentity = cleanString(env.AWS_SMS_ORIGINATION_IDENTITY, 160);
+  const configurationSetName = cleanString(env.AWS_SMS_CONFIGURATION_SET_NAME, 160);
+
+  if (!accessKeyId || !secretAccessKey || !originationIdentity) {
+    return {
+      ok: false,
+      dryRun: true,
+      status: 501,
+      provider: "aws-end-user-messaging",
+      error: "AWS SMS sending is not configured. Set AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_SMS_ORIGINATION_IDENTITY, and optionally AWS_SMS_REGION/AWS_SMS_CONFIGURATION_SET_NAME."
+    };
+  }
+
+  const payload = {
+    DestinationPhoneNumber: to,
+    MessageBody: message,
+    MessageType: "TRANSACTIONAL",
+    OriginationIdentity: originationIdentity
+  };
+  if (configurationSetName) payload.ConfigurationSetName = configurationSetName;
+
+  const endpoint = `https://sms-voice.${region}.amazonaws.com/v2/text/outbound-messages`;
+  const signed = await awsSignedRequest({
+    method: "POST",
+    url: endpoint,
+    region,
+    service: "sms-voice",
+    accessKeyId,
+    secretAccessKey,
+    sessionToken,
+    body: JSON.stringify(payload)
+  });
+
+  const response = await fetch(endpoint, signed);
+  const text = await response.text();
+  let data = {};
+  try {
+    data = text ? JSON.parse(text) : {};
+  } catch {
+    data = { raw: text };
+  }
+
+  if (!response.ok) {
+    return {
+      ok: false,
+      status: response.status,
+      provider: "aws-end-user-messaging",
+      error: data.message || data.Message || data.__type || "AWS SMS send failed.",
+      details: data
+    };
+  }
+
+  return {
+    ok: true,
+    provider: "aws-end-user-messaging",
+    messageId: data.MessageId || data.messageId || null,
+    details: data
+  };
 }
 
 async function listRecipients(env, userId) {
@@ -344,6 +489,202 @@ async function replaceTaxonomySettings(env, recipientId, settings) {
   }
 }
 
+async function polarWebhook(request, env) {
+  const bodyText = await request.text();
+  if (!env.POLAR_WEBHOOK_SECRET) return json({ error: "Polar webhook secret is not configured." }, 501);
+  const verified = await verifyPolarWebhook(request, bodyText, env.POLAR_WEBHOOK_SECRET);
+  if (!verified) return json({ error: "Invalid webhook signature." }, 403);
+
+  let event;
+  try {
+    event = JSON.parse(bodyText);
+  } catch {
+    return json({ error: "Invalid JSON." }, 400);
+  }
+
+  const eventId = request.headers.get("svix-id") || `${event.type}:${event.timestamp || Date.now()}`;
+  const inserted = await env.DB.prepare(
+    "INSERT OR IGNORE INTO polar_webhook_events (id, type, payload) VALUES (?, ?, ?)"
+  ).bind(eventId, event.type || "unknown", bodyText).run();
+
+  if (!inserted.meta?.changes) return json({ ok: true, duplicate: true }, 202);
+
+  if ((event.type || "").startsWith("benefit_grant.")) {
+    await upsertLicenseFromBenefitGrant(env, event.type, event.data || {});
+  } else if (event.type === "subscription.revoked") {
+    await revokeLicensesBySubscription(env, event.data?.id);
+  }
+
+  return json({ ok: true }, 202);
+}
+
+async function upsertLicenseFromBenefitGrant(env, eventType, data) {
+  const benefitId = data.benefit_id || data.benefit?.id || "";
+  const plan = planFromPolar(data.product_id, benefitId, data.benefit?.metadata?.plan);
+  if (!plan) return;
+
+  const customer = data.customer || {};
+  const email = normalizeEmail(customer.email);
+  const user = await findUserForPolarCustomer(env, customer.external_id, email);
+  const status = eventType === "benefit_grant.revoked" || data.is_revoked ? "revoked" : data.is_granted ? "active" : "pending";
+  const license = extractLicenseKey(data);
+
+  if (customer.id) {
+    await env.DB.prepare(
+      `INSERT INTO polar_customers (id, user_id, email, name, external_id, metadata, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+       ON CONFLICT(id) DO UPDATE SET
+        user_id = COALESCE(excluded.user_id, polar_customers.user_id),
+        email = excluded.email,
+        name = excluded.name,
+        external_id = excluded.external_id,
+        metadata = excluded.metadata,
+        updated_at = CURRENT_TIMESTAMP`
+    ).bind(
+      customer.id,
+      user?.id || null,
+      email || null,
+      cleanString(customer.name || customer.billing_name, 160) || null,
+      cleanString(customer.external_id, 160) || null,
+      JSON.stringify(customer.metadata || {})
+    ).run();
+  }
+
+  await env.DB.prepare(
+    `INSERT INTO user_licenses (
+      id, user_id, polar_customer_id, customer_email, benefit_grant_id, benefit_id,
+      license_key_id, license_key_display, product_id, product_name, subscription_id,
+      order_id, plan, status, granted_at, revoked_at, raw_properties, updated_at
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+    ON CONFLICT(benefit_grant_id) DO UPDATE SET
+      user_id = COALESCE(excluded.user_id, user_licenses.user_id),
+      polar_customer_id = excluded.polar_customer_id,
+      customer_email = excluded.customer_email,
+      benefit_id = excluded.benefit_id,
+      license_key_id = COALESCE(excluded.license_key_id, user_licenses.license_key_id),
+      license_key_display = COALESCE(excluded.license_key_display, user_licenses.license_key_display),
+      product_id = excluded.product_id,
+      product_name = excluded.product_name,
+      subscription_id = excluded.subscription_id,
+      order_id = excluded.order_id,
+      plan = excluded.plan,
+      status = excluded.status,
+      granted_at = COALESCE(excluded.granted_at, user_licenses.granted_at),
+      revoked_at = excluded.revoked_at,
+      raw_properties = excluded.raw_properties,
+      updated_at = CURRENT_TIMESTAMP`
+  ).bind(
+    crypto.randomUUID(),
+    user?.id || null,
+    customer.id || data.customer_id || null,
+    email || null,
+    data.id,
+    benefitId,
+    license.id,
+    license.display,
+    data.product_id || null,
+    plan.name,
+    data.subscription_id || null,
+    data.order_id || null,
+    plan.key,
+    status,
+    data.granted_at || null,
+    data.revoked_at || null,
+    JSON.stringify(data.properties || {})
+  ).run();
+}
+
+async function revokeLicensesBySubscription(env, subscriptionId) {
+  if (!subscriptionId) return;
+  await env.DB.prepare(
+    "UPDATE user_licenses SET status = 'revoked', revoked_at = COALESCE(revoked_at, CURRENT_TIMESTAMP), updated_at = CURRENT_TIMESTAMP WHERE subscription_id = ?"
+  ).bind(subscriptionId).run();
+}
+
+async function linkLicensesForUser(env, userId) {
+  const user = await env.DB.prepare("SELECT email FROM users WHERE id = ? LIMIT 1").bind(userId).first();
+  const email = normalizeEmail(user?.email);
+  if (!email) return;
+  await env.DB.batch([
+    env.DB.prepare("UPDATE polar_customers SET user_id = ?, updated_at = CURRENT_TIMESTAMP WHERE lower(email) = ? AND user_id IS NULL")
+      .bind(userId, email),
+    env.DB.prepare("UPDATE user_licenses SET user_id = ?, updated_at = CURRENT_TIMESTAMP WHERE lower(customer_email) = ? AND user_id IS NULL")
+      .bind(userId, email)
+  ]);
+}
+
+async function findUserForPolarCustomer(env, externalId, email) {
+  if (externalId) {
+    const byExternalId = await env.DB.prepare("SELECT id FROM users WHERE id = ? LIMIT 1").bind(externalId).first();
+    if (byExternalId) return byExternalId;
+  }
+  if (email) {
+    return env.DB.prepare("SELECT id FROM users WHERE lower(email) = ? LIMIT 1").bind(email).first();
+  }
+  return null;
+}
+
+function planFromPolar(productId, benefitId, metadataPlan) {
+  if (POLAR_PLANS[productId]) return POLAR_PLANS[productId];
+  if (POLAR_BENEFITS[benefitId]) return POLAR_BENEFITS[benefitId];
+  return planDetails(metadataPlan);
+}
+
+function planDetails(plan) {
+  if (plan === "starter") return { key: "starter", name: "Care Text Starter", maxRecipients: 3 };
+  if (plan === "family") return { key: "family", name: "Care Text Family", maxRecipients: 10 };
+  return null;
+}
+
+function extractLicenseKey(data) {
+  const sources = [data.properties, data.license_key, data.licenseKey].filter(Boolean);
+  for (const source of sources) {
+    const id = source.license_key_id || source.licenseKeyId || source.key_id || source.id;
+    const display = source.display_key || source.license_key || source.licenseKey || source.key;
+    if (id || display) return { id: id || null, display: display || null };
+  }
+  return { id: null, display: null };
+}
+
+async function verifyPolarWebhook(request, bodyText, secret) {
+  const svixId = request.headers.get("svix-id");
+  const svixTimestamp = request.headers.get("svix-timestamp");
+  const svixSignature = request.headers.get("svix-signature");
+  if (!svixId || !svixTimestamp || !svixSignature) return false;
+
+  const timestamp = Number(svixTimestamp);
+  if (!Number.isFinite(timestamp) || Math.abs((Date.now() / 1000) - timestamp) > 300) return false;
+
+  const key = await crypto.subtle.importKey(
+    "raw",
+    webhookSecretBytes(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const signedContent = `${svixId}.${svixTimestamp}.${bodyText}`;
+  const signature = base64(new Uint8Array(await crypto.subtle.sign("HMAC", key, enc(signedContent))));
+  const expected = enc(signature);
+
+  return svixSignature
+    .split(" ")
+    .map(part => part.trim())
+    .filter(Boolean)
+    .some(part => {
+      const candidate = enc(part.replace(/^v1,/, ""));
+      return timingSafeEqualBytes(candidate, expected);
+    });
+}
+
+function webhookSecretBytes(secret) {
+  const value = secret.startsWith("polar_whs_") ? secret.slice(10) : secret.startsWith("whsec_") ? secret.slice(6) : secret;
+  try {
+    return Uint8Array.from(atob(value), char => char.charCodeAt(0));
+  } catch {
+    return enc(secret);
+  }
+}
+
 async function requireSession(request, env) {
   const token = getCookie(request, SESSION_COOKIE);
   if (!token) return json({ error: "Authentication required." }, 401);
@@ -404,6 +745,11 @@ function normalizeRecipient(body) {
 
 function normalizePhone(value) {
   return String(value || "").trim().replace(/[^\d+]/g, "").slice(0, 24);
+}
+
+function normalizeE164(value) {
+  const phone = normalizePhone(value);
+  return /^\+[1-9]\d{6,14}$/.test(phone) ? phone : "";
 }
 
 function normalizeEmail(value) {
@@ -467,10 +813,87 @@ function enc(value) {
   return new TextEncoder().encode(value);
 }
 
+async function awsSignedRequest({ method, url, region, service, accessKeyId, secretAccessKey, sessionToken, body }) {
+  const target = new URL(url);
+  const now = new Date();
+  const amzDate = now.toISOString().replace(/[:-]|\.\d{3}/g, "");
+  const dateStamp = amzDate.slice(0, 8);
+  const payloadHash = await sha256Hex(body);
+
+  const headers = {
+    "Content-Type": "application/json",
+    "Host": target.host,
+    "X-Amz-Content-Sha256": payloadHash,
+    "X-Amz-Date": amzDate
+  };
+  if (sessionToken) headers["X-Amz-Security-Token"] = sessionToken;
+
+  const signedHeaderNames = Object.keys(headers).map(name => name.toLowerCase()).sort();
+  const canonicalHeaders = signedHeaderNames
+    .map(name => `${name}:${headers[headerName(headers, name)].toString().trim().replace(/\s+/g, " ")}\n`)
+    .join("");
+  const signedHeaders = signedHeaderNames.join(";");
+  const canonicalRequest = [
+    method,
+    target.pathname,
+    target.searchParams.toString(),
+    canonicalHeaders,
+    signedHeaders,
+    payloadHash
+  ].join("\n");
+
+  const credentialScope = `${dateStamp}/${region}/${service}/aws4_request`;
+  const stringToSign = [
+    "AWS4-HMAC-SHA256",
+    amzDate,
+    credentialScope,
+    await sha256Hex(canonicalRequest)
+  ].join("\n");
+  const signingKey = await awsSigningKey(secretAccessKey, dateStamp, region, service);
+  const signature = bytesToHex(new Uint8Array(await crypto.subtle.sign("HMAC", signingKey, enc(stringToSign))));
+
+  headers.Authorization = `AWS4-HMAC-SHA256 Credential=${accessKeyId}/${credentialScope}, SignedHeaders=${signedHeaders}, Signature=${signature}`;
+  return { method, headers, body };
+}
+
+function headerName(headers, lowercaseName) {
+  return Object.keys(headers).find(name => name.toLowerCase() === lowercaseName);
+}
+
+async function awsSigningKey(secretAccessKey, dateStamp, region, service) {
+  const dateKey = await hmacBytes(enc(`AWS4${secretAccessKey}`), dateStamp);
+  const dateRegionKey = await hmacBytes(dateKey, region);
+  const dateRegionServiceKey = await hmacBytes(dateRegionKey, service);
+  const signingKeyBytes = await hmacBytes(dateRegionServiceKey, "aws4_request");
+  return crypto.subtle.importKey("raw", signingKeyBytes, { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+}
+
+async function hmacBytes(keyBytes, value) {
+  const key = await crypto.subtle.importKey("raw", keyBytes, { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  return new Uint8Array(await crypto.subtle.sign("HMAC", key, enc(value)));
+}
+
+function bytesToHex(bytes) {
+  return [...bytes].map(byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
 function base64url(bytes) {
   let binary = "";
   for (const byte of bytes) binary += String.fromCharCode(byte);
   return btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+}
+
+function base64(bytes) {
+  let binary = "";
+  for (const byte of bytes) binary += String.fromCharCode(byte);
+  return btoa(binary);
+}
+
+function timingSafeEqualBytes(left, right) {
+  if (left.byteLength !== right.byteLength) return false;
+  let diff = 0;
+  for (let i = 0; i < left.byteLength; i += 1) diff |= left[i] ^ right[i];
+  return diff === 0;
 }
 
 function googleRedirectUri(url, env) {

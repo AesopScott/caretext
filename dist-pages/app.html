@@ -9,27 +9,27 @@
   <meta property="og:description" content="A message can change the shape of a day.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://caretext.net/app.html">
-  <meta property="og:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink2">
-  <meta property="og:image:secure_url" content="https://caretext.net/assets/og-caretext.png?v=bluepink2">
+  <meta property="og:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <meta property="og:image:secure_url" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Care Text">
   <meta name="twitter:description" content="A message can change the shape of a day.">
-  <meta name="twitter:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink2">
-  <link rel="image_src" href="/assets/og-caretext.png?v=bluepink2">
-  <link rel="alternate" type="image/svg+xml" href="/assets/og-caretext.svg?v=bluepink2">
-  <link rel="icon" href="/favicon.svg?v=bluepink2" type="image/svg+xml">
-  <link rel="icon" href="/favicon.ico?v=bluepink2" sizes="any">
-  <link rel="icon" href="/favicon-32.png?v=bluepink2" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="/favicon-180.png?v=bluepink2">
+  <meta name="twitter:image" content="https://caretext.net/assets/og-caretext.png?v=bluepink3">
+  <link rel="image_src" href="/assets/og-caretext.png?v=bluepink3">
+  <link rel="alternate" type="image/svg+xml" href="/assets/og-caretext.svg?v=bluepink3">
+  <link rel="icon" href="/favicon.svg?v=bluepink3" type="image/svg+xml">
+  <link rel="icon" href="/favicon.ico?v=bluepink3" sizes="any">
+  <link rel="icon" href="/favicon-32.png?v=bluepink3" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/favicon-180.png?v=bluepink3">
   <style>
     :root {
       --ink: #20384f;
-      --orange: #cf7f9a;
+      --rose: #cf7f9a;
       --pink: #d97f9f;
-      --green: #8aa5b8;
+      --slate: #8aa5b8;
       --blue: #4f7fa6;
       --paper: #fffdf8;
       --line: rgba(32, 56, 79, .14);
@@ -66,18 +66,33 @@
     }
 
     .top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
       padding-block: 18px;
       border-bottom: 0;
-      background: transparent;
-      backdrop-filter: none;
+      background: rgba(252, 231, 239, .94);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(24px, 3vw, 40px);
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1;
+      white-space: nowrap;
     }
 
     .top img {
-      width: clamp(136px, 14vw, 190px);
+      width: clamp(128px, 12vw, 174px);
       height: auto;
       padding: 0;
       border-radius: var(--radius);
@@ -134,13 +149,13 @@
       font-size: clamp(52px, 8vw, 124px);
       font-style: italic;
       font-weight: 600;
-      line-height: .88;
+      line-height: 1.03;
       letter-spacing: 0;
       text-transform: none;
       text-wrap: balance;
     }
 
-    h1 span { color: var(--orange); }
+    h1 span { color: var(--rose); }
 
     .lead {
       max-width: 720px;
@@ -161,11 +176,14 @@
     }
 
     .plan {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
       border: 1px solid rgba(217, 127, 159, .22);
       border-radius: 18px;
       padding: 18px;
       background: rgba(255,255,255,.82);
       box-shadow: 0 16px 40px rgba(58, 76, 105, .08);
+      text-align: center;
     }
 
     .plan strong {
@@ -180,6 +198,15 @@
       color: var(--muted);
       font-weight: 800;
       line-height: 1.35;
+    }
+
+    .plan .buy-link {
+      width: 100%;
+      min-height: 42px;
+      margin-top: 14px;
+      align-self: end;
+      background: var(--ink);
+      color: #fffdf8;
     }
 
     form {
@@ -197,6 +224,7 @@
       margin-bottom: 0;
       font-size: clamp(30px, 4vw, 54px);
       line-height: .95;
+      text-align: center;
       text-wrap: balance;
     }
 
@@ -228,7 +256,7 @@
 
     .fine {
       margin: 0;
-      color: var(--muted);
+      color: #c8325a;
       font-size: 13px;
       font-weight: 700;
       line-height: 1.42;
@@ -277,15 +305,23 @@
         align-items: flex-start;
         flex-direction: column;
       }
+
+      .brand {
+        align-items: flex-start;
+        flex-direction: column;
+        white-space: normal;
+      }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <header class="top">
-      <a href="/"><img src="/assets/images/logo-header.webp?v=bluepink2" alt="Care Text"></a>
+      <a class="brand" href="/">
+        <img src="/assets/images/logo-header.webp?v=bluepink3" alt="Care Text">
+        <span>Say the thing that matters.</span>
+      </a>
       <nav class="nav" aria-label="Signup navigation">
-        <a class="button secondary" href="/">Home</a>
         <a class="button secondary" href="/learn-more.html">Learn more</a>
       </nav>
     </header>
@@ -295,8 +331,8 @@
         <h1>Start sending <span>better little messages.</span></h1>
         <p class="lead">A simple way to stay close to the people who matter most, even when life gets full.</p>
         <div class="plans" aria-label="Care Text plans">
-          <div class="plan"><strong>$4.99</strong><p>per month for up to 3 loved ones.</p></div>
-          <div class="plan"><strong>$9.99</strong><p>per month for up to 10 loved ones / friends / connections.</p></div>
+          <div class="plan"><strong>$4.99</strong><p>per month for up to 3 loved ones / friends / connections.</p><a class="button buy-link" href="https://buy.polar.sh/polar_cl_bbaW1XFCdx2IRVgcDZfq5mdRTNGVD3eW9svYF2IRdAB">Start Close Circle</a></div>
+          <div class="plan"><strong>$9.99</strong><p>per month for up to 10 loved ones / friends / connections.</p><a class="button buy-link" href="https://buy.polar.sh/polar_cl_ZKINA0MWrAhTJdtbd2x27c203zYKoRNkWlmGW2IyhNO">Start Full Circle</a></div>
         </div>
       </div>
 
@@ -306,15 +342,15 @@
         <label>Email <input name="email" type="email" autocomplete="email" required></label>
         <label>Plan
           <select name="plan" required>
-            <option value="3-loved-ones">$4.99 / month - up to 3 loved ones</option>
-            <option value="10-loved-ones">$9.99 / month - up to 10 loved ones / friends / connections</option>
+            <option value="3-connections">Close Circle - $4.99 / month - up to 3 loved ones / friends / connections</option>
+            <option value="10-connections">Full Circle - $9.99 / month - up to 10 loved ones / friends / connections</option>
           </select>
         </label>
         <label>Who do you want to stay close to?
           <textarea name="relationships" placeholder="Spouse, parents, kids, friends..."></textarea>
         </label>
-        <button>Join the signup list</button>
-        <p class="fine">We will use this to follow up about Care Text access. No spam, no selling your information.</p>
+        <button>Join the Waiting List - July 2026</button>
+        <p class="fine">We will use this to follow up about Care Text access when we GO LIVE July 2026. No spam, no selling your information.</p>
         <div class="message" id="message" role="status" aria-live="polite"></div>
       </form>
     </section>

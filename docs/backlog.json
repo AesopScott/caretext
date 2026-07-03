@@ -1,3 +1,16 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "email-delivery-channel",
+      "title": "Support sending encouragement by email as well as SMS",
+      "status": "backlog",
+      "notes": [
+        "Profile connections currently collect international phone numbers for SMS.",
+        "Future profile work should add optional email address fields and delivery-channel preferences.",
+        "Future delivery settings should allow email, SMS, or both per connection.",
+        "Message shaping should still use taxonomy and relationship type.",
+        "Evaluate Cloudflare Email Service or another transactional email provider before implementation."
+      ]
+    }
+  ]
 }
